@@ -14,18 +14,27 @@ Automatically convert strings to f-strings or template strings and back.
 - When typing `{}` in a python string, automatically convert it to a f-string. 
 - When typing `${}` in a javascript or typescript string, automatically convert it to a template string.
 - When *removing* the `{}` or `${}`, automatically convert it back to a string.
+- Also works with multi-line strings.
+- No configuration needed, just install and you are ready to go.
 
 ## Installation
 
 ```lua
 -- lazy.nvim
-{ "chrisgrieser/nvim-puppeteer", lazy = true },
+{ 
+    "chrisgrieser/nvim-puppeteer",
+	dependencies = "nvim-treesitter/nvim-treesitter",
+    ft = { "python", "javascript", "typescript" },
+},
 
 -- packer
-use { "chrisgrieser/nvim-puppeteer" }
+use {
+	"chrisgrieser/nvim-puppeteer",
+	requires = "nvim-treesitter/nvim-treesitter",
+}
 ```
 
-No configuration or `.setup()` call required, the plugin automatically lazy-loads when entering a buffer of a supported filetype.
+No configuration or `.setup()` call required. The plugin already automatically loads as little as possible.
 
 ## Credits
 <!-- vale Google.FirstPerson = NO -->
