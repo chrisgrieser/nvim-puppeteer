@@ -1,50 +1,31 @@
-# {{plugin-name}}
-<a href="https://dotfyle.com/plugins/chrisgrieser/{{plugin-name}}"><img src="https://dotfyle.com/plugins/chrisgrieser/{{plugin-name}}/shield" /></a>
+<!-- LTeX: enabled=false -->
+# nvim-puppeteer <!-- LTeX: enabled=true -->
+<a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer"><img src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield" /></a>
 
-{{plugin-desc}}
+Automatically convert strings to f-strings or template strings and back.
 
 <!--toc:start-->
 - [Features](#features)
 - [Installation](#installation)
-- [Configuration](#configuration)
-- [Limitations](#limitations)
 - [Credits](#credits)
 <!--toc:end-->
 
 ## Features
+- When typing `{}` in a python string, automatically convert it to a f-string. 
+- When typing `${}` in a javascript or typescript string, automatically convert it to a template string.
+- When *removing* the `{}` or `${}`, automatically convert it back to a string.
 
 ## Installation
 
 ```lua
 -- lazy.nvim
-{
-	"chrisgrieser/{{plugin-name}}",
-	opts = {
-		
-	},
-},
+{ "chrisgrieser/nvim-puppeteer", lazy = true },
 
 -- packer
-use {
-	"chrisgrieser/{{plugin-name}}",
-	config = function () 
-		require("{{plugin-name-short}}").setup ({
-			
-		})
-	end,
-}
+use { "chrisgrieser/nvim-puppeteer" }
 ```
 
-## Configuration
-
-```lua
--- default values
-opts = {
-
-}
-```
-
-## Limitations
+No configuration or `.setup()` call required, the plugin automatically lazy-loads when entering a buffer of a supported filetype.
 
 ## Credits
 <!-- vale Google.FirstPerson = NO -->
