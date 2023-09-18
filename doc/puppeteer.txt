@@ -11,13 +11,7 @@ Table of Contents                                *puppeteer-table-of-contents*
 ==============================================================================
 1. nvim-puppeteer                                  *puppeteer-nvim-puppeteer-*
 
-
-
 Automatically convert strings to f-strings or template strings and back.
-
-- |puppeteer-features|
-- |puppeteer-installation|
-- |puppeteer-credits|
 
 
 FEATURES                                  *puppeteer-nvim-puppeteer--features*
