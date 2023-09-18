@@ -1,6 +1,6 @@
 <!-- LTeX: enabled=false -->
 # nvim-puppeteer <!-- LTeX: enabled=true -->
-<!-- <a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer"><img src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield" /></a> -->
+<a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer"><img src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield" /></a>
 
 Automatically convert strings to f-strings or template strings and back.
 
