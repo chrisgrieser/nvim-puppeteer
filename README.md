@@ -30,7 +30,7 @@ use {
 
 The respective Treesitter parsers are required: `:TSInstall python javascript typescript`.
 
-No configuration or `.setup()` call required. The plugin already automatically loads as little as possible.
+No configuration or `.setup()` call is needed. The plugin already automatically loads as little as possible.
 
 ## Credits
 <!-- vale Google.FirstPerson = NO -->
