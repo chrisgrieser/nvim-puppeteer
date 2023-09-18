@@ -7,7 +7,7 @@ Automatically convert strings to f-strings or template strings and back.
 ## Features
 - When typing `{}` in a python string, automatically convert it to a f-string. 
 - When typing `${}` in a javascript or typescript string, automatically convert it to a template string.
-- When *removing* the `{}` or `${}`, automatically convert it back to a string.
+- When *removing* the `{}` or `${}`, automatically convert it back to a regular string.
 - Also works with multi-line strings.
 - No configuration needed, just install and you are ready to go.
 
