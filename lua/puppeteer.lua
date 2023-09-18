@@ -74,20 +74,4 @@ function M.pythonFStr()
 end
 
 --------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "javascript", "typescript" },
-	callback = function(ctx)
-		local ft = ctx.match
-		local func
-		-- if ft == "python" then func = pythonFStr end
-		-- if ft == "javascript" or ft == "typescript" then func = templateStr end
-		vim.api.nvim_create_autocmd("InsertLeave", {
-			buffer = 0,
-			callback = func,
-		})
-	end,
-})
-
---------------------------------------------------------------------------------
 return M
