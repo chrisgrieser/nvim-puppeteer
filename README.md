@@ -22,9 +22,9 @@ Automatically convert strings to f-strings or template strings and back.
 ```lua
 -- lazy.nvim
 { 
-    "chrisgrieser/nvim-puppeteer",
+	"chrisgrieser/nvim-puppeteer",
 	dependencies = "nvim-treesitter/nvim-treesitter",
-    ft = { "python", "javascript", "typescript" },
+	ft = { "python", "javascript", "typescript" },
 },
 
 -- packer
