@@ -38,7 +38,7 @@ INSTALLATION                         *puppeteer-nvim-puppeteer---installation*
     { 
         "chrisgrieser/nvim-puppeteer",
         dependencies = "nvim-treesitter/nvim-treesitter",
-        ft = { "python", "javascript", "typescript" },
+        lazy = false, -- plugin lazy-loads itself
     },
     
     -- packer
