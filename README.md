@@ -1,8 +1,8 @@
 <!-- LTeX: enabled=false -->
-# nvim-puppeteer <!-- LTeX: enabled=true -->
+# nvim-puppeteer <!-- LTeX: enabled=true --> 🎎
 <!-- <a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer"><img src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield" /></a> -->
 
-Automatically convert strings to f-strings or template strings and back.
+Master of strings. Automatically convert strings to f-strings or template strings and back.
 
 ## Features
 - When typing `{}` in a python string, automatically convert it to a f-string. 
