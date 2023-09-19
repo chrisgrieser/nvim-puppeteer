@@ -1,20 +1,21 @@
-*puppeteer.txt*         For NVIM v0.8.0         Last change: 2023 September 18
+*puppeteer.txt*         For NVIM v0.8.0         Last change: 2023 September 19
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
 
-1. nvim-puppeteer                                  |puppeteer-nvim-puppeteer-|
-  - Features                              |puppeteer-nvim-puppeteer--features|
-  - Installation                      |puppeteer-nvim-puppeteer--installation|
-  - Credits                                |puppeteer-nvim-puppeteer--credits|
+1. nvim-puppeteer                                 |puppeteer-nvim-puppeteer--|
+  - Features                             |puppeteer-nvim-puppeteer---features|
+  - Installation                     |puppeteer-nvim-puppeteer---installation|
+  - Credits                               |puppeteer-nvim-puppeteer---credits|
 
 ==============================================================================
-1. nvim-puppeteer                                  *puppeteer-nvim-puppeteer-*
+1. nvim-puppeteer                                 *puppeteer-nvim-puppeteer--*
 
-Automatically convert strings to f-strings or template strings and back.
+Masterof strings. Automatically convert strings to f-strings or template
+strings and back.
 
 
-FEATURES                                  *puppeteer-nvim-puppeteer--features*
+FEATURES                                 *puppeteer-nvim-puppeteer---features*
 
 - When typing `{}` in a python string, automatically convert it to a f-string.
 - When typing `${}` in a javascript or typescript string, automatically convert it to a template string.
@@ -23,7 +24,7 @@ FEATURES                                  *puppeteer-nvim-puppeteer--features*
 - No configuration needed, just install and you are ready to go.
 
 
-INSTALLATION                          *puppeteer-nvim-puppeteer--installation*
+INSTALLATION                         *puppeteer-nvim-puppeteer---installation*
 
 >lua
     -- lazy.nvim
@@ -47,7 +48,7 @@ No configuration or `.setup()` call is needed. The plugin already automatically
 loads as little as possible.
 
 
-CREDITS                                    *puppeteer-nvim-puppeteer--credits*
+CREDITS                                   *puppeteer-nvim-puppeteer---credits*
 
 **About Me** In my day job, I am a sociologist studying the social mechanisms
 underlying the digital economy. For my PhD project, I investigate the
