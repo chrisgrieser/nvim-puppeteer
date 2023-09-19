@@ -10,11 +10,21 @@ local function replaceNodeText(node, replacementText)
 	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end
 
+---get node at cursor and validate that the user has at least nvim 0.9
+---@return nil|object returns nil if no node or nvim version too old
+local function getNodeAtCursor()
+	if ts.get_node == nil then
+		vim.notify("nvim-puppeteer requires at least nvim 0.9.", vim.log.levels.WARN)
+		return nil
+	end
+	return ts.get_node()
+end
+
 --------------------------------------------------------------------------------
 
 -- auto-convert string to template string and back
 function M.templateStr()
-	local node = ts.get_node()
+	local node = getNodeAtCursor()
 	if not node then return end
 	local strNode
 	local isTemplateStr
@@ -46,7 +56,7 @@ end
 
 -- auto-convert string to f-string and back
 function M.pythonFStr()
-	local node = ts.get_node()
+	local node = getNodeAtCursor()
 	if not node then return end
 	local strNode
 	if node:type() == "string" then

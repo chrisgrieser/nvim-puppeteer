@@ -11,6 +11,10 @@ Master of strings. Automatically convert strings to f-strings or template string
 - Also works with multi-line strings.
 - No configuration needed, just install and you are ready to go.
 
+## Requirements
+- nvim 0.9 or higher.
+- The respective Treesitter parsers are required: `:TSInstall python javascript typescript`.
+
 ## Installation
 
 ```lua
@@ -27,8 +31,6 @@ use {
 	requires = "nvim-treesitter/nvim-treesitter",
 }
 ```
-
-The respective Treesitter parsers are required: `:TSInstall python javascript typescript`.
 
 No configuration or `.setup()` call is needed. The plugin already automatically loads as little as possible.
 
