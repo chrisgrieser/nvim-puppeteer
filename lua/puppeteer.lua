@@ -47,11 +47,11 @@ function M.templateStr()
 	local surrounding
 
 	if not isTemplateStr and hasBraces then
-		surrounding = text:sub(1,1)
-		text = "`" .. text:sub(2,-2) .. "`"
+		surrounding = text:sub(1, 1)
+		text = "`" .. text:sub(2, -2) .. "`"
 		replaceNodeText(strNode, text)
 	elseif isTemplateStr and not hasBraces then
-		text = surrounding .. text:sub(2,-2) .. surrounding
+		text = surrounding .. text:sub(2, -2) .. surrounding
 		replaceNodeText(strNode, text)
 	end
 end
