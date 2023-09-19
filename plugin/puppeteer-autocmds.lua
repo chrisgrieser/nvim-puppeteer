@@ -1,21 +1,22 @@
-local jsLikeFiletypes = {
-	"javascript",
-	"typescript",
-	"typescriptreact",
-	"javascriptreact",
-	"vue",
+-- PERF the function names are saved as string so the main module is only loaded
+-- when needed
+local supportedFiletypes = {
+	python = "pythonFStr",
+	javascript = "templateStr",
+	typescript = "templateStr",
+	javascriptreact = "templateStr",
+	typescriptreact = "templateStr",
+	vue = "templateStr",
 }
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", unpack(jsLikeFiletypes) },
+	pattern = vim.tbl_keys(supportedFiletypes),
 	callback = function(ctx)
 		local ft = ctx.match
-		local func
-		if ft == "python" then func = require("puppeteer").pythonFStr end
-		if vim.tbl_contains(jsLikeFiletypes, ft) then func = require("puppeteer").templateStr end
+		local stringTransformFunc = require("puppeteer")[supportedFiletypes[ft]]
 		vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 			buffer = 0,
-			callback = func,
+			callback = stringTransformFunc,
 		})
 	end,
 })
