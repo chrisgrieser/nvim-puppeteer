@@ -22,7 +22,7 @@ Master of strings. Automatically convert strings to f-strings or template string
 { 
 	"chrisgrieser/nvim-puppeteer",
 	dependencies = "nvim-treesitter/nvim-treesitter",
-	ft = { "python", "javascript", "typescript" },
+	lazy = false, -- plugin lazy-loads itself
 },
 
 -- packer
