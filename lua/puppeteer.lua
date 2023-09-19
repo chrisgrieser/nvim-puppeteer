@@ -26,6 +26,7 @@ end
 function M.templateStr()
 	local node = getNodeAtCursor()
 	if not node then return end
+
 	local strNode
 	local isTemplateStr
 	if node:type() == "string" then
@@ -40,24 +41,24 @@ function M.templateStr()
 	else
 		return
 	end
-	local text = ts.get_node_text(strNode, 0)
 
+	local text = ts.get_node_text(strNode, 0)
 	local hasBraces = text:find("${%w.-}")
-	if (isTemplateStr and hasBraces) or (not isTemplateStr and not hasBraces) then
-		return
-	elseif not isTemplateStr and hasBraces then
+
+	if not isTemplateStr and hasBraces then
 		text = "`" .. text:sub(2, -2) .. "`"
+		replaceNodeText(strNode, text)
 	elseif isTemplateStr and not hasBraces then
 		text = '"' .. text:sub(2, -2) .. '"'
+		replaceNodeText(strNode, text)
 	end
-
-	replaceNodeText(strNode, text)
 end
 
 -- auto-convert string to f-string and back
 function M.pythonFStr()
 	local node = getNodeAtCursor()
 	if not node then return end
+
 	local strNode
 	if node:type() == "string" then
 		strNode = node
@@ -68,19 +69,18 @@ function M.pythonFStr()
 	else
 		return
 	end
-	local text = ts.get_node_text(strNode, 0)
 
+	local text = ts.get_node_text(strNode, 0)
 	local isFString = text:find("^f")
 	local hasBraces = text:find("{%w.-}")
-	if (isFString and hasBraces) or (not isFString and not hasBraces) then
-		return
-	elseif not isFString and hasBraces then
+
+	if not isFString and hasBraces then
 		text = "f" .. text
+		replaceNodeText(strNode, text)
 	elseif isFString and not hasBraces then
 		text = text:sub(2)
+		replaceNodeText(strNode, text)
 	end
-
-	replaceNodeText(strNode, text)
 end
 
 --------------------------------------------------------------------------------
