@@ -44,12 +44,14 @@ function M.templateStr()
 
 	local text = ts.get_node_text(strNode, 0)
 	local hasBraces = text:find("${%w.-}")
+	local surrounding
 
 	if not isTemplateStr and hasBraces then
-		text = "`" .. text:sub(2, -2) .. "`"
+		surrounding = text:sub(1,1)
+		text = "`" .. text:sub(2,-2) .. "`"
 		replaceNodeText(strNode, text)
 	elseif isTemplateStr and not hasBraces then
-		text = '"' .. text:sub(2, -2) .. '"'
+		text = surrounding .. text:sub(2,-2) .. surrounding
 		replaceNodeText(strNode, text)
 	end
 end
