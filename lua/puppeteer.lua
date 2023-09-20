@@ -44,14 +44,14 @@ function M.templateStr()
 
 	local text = ts.get_node_text(strNode, 0)
 	local hasBraces = text:find("${%w.-}")
-	local surrounding = "'"
+	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
 
 	if not isTemplateStr and hasBraces then
-		surrounding = text:sub(1, 1)
+		quotationMark = text:sub(1, 1) -- remember the quotation mark
 		text = "`" .. text:sub(2, -2) .. "`"
 		replaceNodeText(strNode, text)
 	elseif isTemplateStr and not hasBraces then
-		text = surrounding .. text:sub(2, -2) .. surrounding
+		text = quotationMark .. text:sub(2, -2) .. quotationMark
 		replaceNodeText(strNode, text)
 	end
 end
