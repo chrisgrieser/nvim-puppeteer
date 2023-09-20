@@ -44,7 +44,7 @@ function M.templateStr()
 
 	local text = ts.get_node_text(strNode, 0)
 	local hasBraces = text:find("${%w.-}")
-	local surrounding
+	local surrounding = "'"
 
 	if not isTemplateStr and hasBraces then
 		surrounding = text:sub(1, 1)
