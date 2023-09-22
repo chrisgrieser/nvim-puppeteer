@@ -36,6 +36,9 @@ function M.templateStr()
 		strNode = node:parent()
 		isTemplateStr = false
 	elseif node:type() == "template_string" then
+		local parent = node:parent()
+		if parent:type() == "call_expression" then return end
+		
 		strNode = node
 		isTemplateStr = true
 	else
