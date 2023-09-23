@@ -37,7 +37,7 @@ function M.templateStr()
 		isTemplateStr = false
 	elseif node:type() == "template_string" then
 		local parent = node:parent()
-		if parent:type() == "call_expression" then return end
+		if parent:type() == "call_expression" then return end -- tagged template, see #5
 
 		strNode = node
 		isTemplateStr = true
