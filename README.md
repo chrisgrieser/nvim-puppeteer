@@ -6,8 +6,8 @@ Master of strings. Automatically convert strings to f-strings or template string
 
 ## Features
 - When typing `{}` in a python string, automatically convert it to an f-string. 
-- When typing `${}` in a javascript or typescript string, automatically convert it to a template string.
-- When *removing* the `{}` or `${}`, automatically convert it back to a regular string.
+- When adding `${}` or a linebreak in a javascript-string, automatically convert it to a template string.
+- When *removing* the `{}`, `${}`, or linebreak, automatically convert it back to a regular string.
 - Also works with multi-line strings.
 - No configuration needed, just install and you are ready to go.
 
@@ -22,7 +22,7 @@ Master of strings. Automatically convert strings to f-strings or template string
 { 
 	"chrisgrieser/nvim-puppeteer",
 	dependencies = "nvim-treesitter/nvim-treesitter",
-	lazy = false, -- plugin lazy-loads itself
+	lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
 },
 
 -- packer

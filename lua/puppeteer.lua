@@ -24,7 +24,6 @@ end
 
 -- auto-convert string to template string and back
 function M.templateStr()
-	-- determine node
 	local node = getNodeAtCursor()
 	if not node then return end
 
@@ -42,21 +41,20 @@ function M.templateStr()
 		return
 	end
 
-	-- GUARD: cases where we want to keep a template string, even if it has no ${} inside
-	local isTaggedTemplate = node:parent():type() == "call_expression" -- see #5
-	local isMultilineString = ts.get_node_text(node, 0):find("[\n\r]") -- see #6
-	if isTemplateStr and (isTaggedTemplate or isMultilineString) then return end
-
-	-- CONVERSION
 	local text = ts.get_node_text(strNode, 0)
-	local hasBraces = text:find("${%w.-}")
 	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
 
-	if not isTemplateStr and hasBraces then
+	local isTaggedTemplate = node:parent():type() == "call_expression"
+	local isMultilineString = ts.get_node_text(node, 0):find("[\n\r]")
+	local hasBraces = text:find("${%w.-}")
+
+	if not isTemplateStr and (hasBraces or isMultilineString) then
 		quotationMark = text:sub(1, 1) -- remember the quotation mark
 		text = "`" .. text:sub(2, -2) .. "`"
 		replaceNodeText(strNode, text)
-	elseif isTemplateStr and not hasBraces then
+	elseif isTemplateStr and not (hasBraces or isMultilineString or isTaggedTemplate) then
+		-- INFO taggedTemplate and multilineString have no ${}, but we still want
+		-- to keep the template
 		text = quotationMark .. text:sub(2, -2) .. quotationMark
 		replaceNodeText(strNode, text)
 	end
