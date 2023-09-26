@@ -19,8 +19,8 @@ strings and back.
 FEATURES                                 *puppeteer-nvim-puppeteer---features*
 
 - When typing `{}` in a python string, automatically convert it to an f-string.
-- When typing `${}` in a javascript or typescript string, automatically convert it to a template string.
-- When _removing_ the `{}` or `${}`, automatically convert it back to a regular string.
+- When adding `${}` or a linebreak in a javascript-string, automatically convert it to a template string.
+- When _removing_ the `{}`, `${}`, or linebreak, automatically convert it back to a regular string.
 - Also works with multi-line strings.
 - No configuration needed, just install and you are ready to go.
 
@@ -38,7 +38,7 @@ INSTALLATION                         *puppeteer-nvim-puppeteer---installation*
     { 
         "chrisgrieser/nvim-puppeteer",
         dependencies = "nvim-treesitter/nvim-treesitter",
-        lazy = false, -- plugin lazy-loads itself
+        lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
     },
     
     -- packer
