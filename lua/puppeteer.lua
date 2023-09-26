@@ -2,7 +2,7 @@ local M = {}
 
 local ts = vim.treesitter
 
----@param node object
+---@param node table
 ---@param replacementText string
 local function replaceNodeText(node, replacementText)
 	local startRow, startCol, endRow, endCol = node:range()
@@ -11,7 +11,7 @@ local function replaceNodeText(node, replacementText)
 end
 
 ---get node at cursor and validate that the user has at least nvim 0.9
----@return nil|object returns nil if no node or nvim version too old
+---@return nil|table returns nil if no node or nvim version too old
 local function getNodeAtCursor()
 	if ts.get_node == nil then
 		vim.notify("nvim-puppeteer requires at least nvim 0.9.", vim.log.levels.WARN)
@@ -24,11 +24,11 @@ end
 
 -- auto-convert string to template string and back
 function M.templateStr()
+	-- determine node
 	local node = getNodeAtCursor()
 	if not node then return end
 
-	local strNode
-	local isTemplateStr
+	local strNode, isTemplateStr
 	if node:type() == "string" then
 		strNode = node
 		isTemplateStr = false
@@ -36,15 +36,18 @@ function M.templateStr()
 		strNode = node:parent()
 		isTemplateStr = false
 	elseif node:type() == "template_string" then
-		local parent = node:parent()
-		if parent:type() == "call_expression" then return end -- tagged template, see #5
-
 		strNode = node
 		isTemplateStr = true
 	else
 		return
 	end
 
+	-- GUARD: cases where we want to keep a template string, even if it has no ${} inside
+	local isTaggedTemplate = node:parent():type() == "call_expression" -- see #5
+	local isMultilineString = ts.get_node_text(node, 0):find("[\n\r]") -- see #6
+	if isTemplateStr and (isTaggedTemplate or isMultilineString) then return end
+
+	-- CONVERSION
 	local text = ts.get_node_text(strNode, 0)
 	local hasBraces = text:find("${%w.-}")
 	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
