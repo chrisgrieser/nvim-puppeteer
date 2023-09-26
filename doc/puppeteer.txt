@@ -3,35 +3,37 @@
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
 
-1. nvim-puppeteer                                 |puppeteer-nvim-puppeteer--|
-  - Features                             |puppeteer-nvim-puppeteer---features|
-  - Requirements                     |puppeteer-nvim-puppeteer---requirements|
-  - Installation                     |puppeteer-nvim-puppeteer---installation|
-  - Credits                               |puppeteer-nvim-puppeteer---credits|
+1. nvim-puppeteer                                  |puppeteer-nvim-puppeteer-|
+  - Features                              |puppeteer-nvim-puppeteer--features|
+  - Requirements                      |puppeteer-nvim-puppeteer--requirements|
+  - Installation                      |puppeteer-nvim-puppeteer--installation|
+  - Credits                                |puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
-1. nvim-puppeteer                                 *puppeteer-nvim-puppeteer--*
+1. nvim-puppeteer                                  *puppeteer-nvim-puppeteer-*
+
+
 
 Masterof strings. Automatically convert strings to f-strings or template
 strings and back.
 
 
-FEATURES                                 *puppeteer-nvim-puppeteer---features*
+FEATURES                                  *puppeteer-nvim-puppeteer--features*
 
 - When typing `{}` in a python string, automatically convert it to an f-string.
-- When adding `${}` or a linebreak in a javascript-string, automatically convert it to a template string.
-- When _removing_ the `{}`, `${}`, or linebreak, automatically convert it back to a regular string.
+- When adding `${}` or a line break in a JavaScript string, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
+- When _removing_ the `{}`, `${}`, or line break, automatically convert it back to a regular string.
 - Also works with multi-line strings.
-- No configuration needed, just install and you are ready to go.
+- No configuration needed, just install, and you are ready to go.
 
 
-REQUIREMENTS                         *puppeteer-nvim-puppeteer---requirements*
+REQUIREMENTS                          *puppeteer-nvim-puppeteer--requirements*
 
 - nvim 0.9 or higher.
-- The respective Treesitter parsers are required: `:TSInstall python javascript typescript`.
+- The respective Treesitter parsers: `:TSInstall python javascript typescript`.
 
 
-INSTALLATION                         *puppeteer-nvim-puppeteer---installation*
+INSTALLATION                          *puppeteer-nvim-puppeteer--installation*
 
 >lua
     -- lazy.nvim
@@ -52,7 +54,7 @@ No configuration or `.setup()` call is needed. The plugin already automatically
 loads as little as possible.
 
 
-CREDITS                                   *puppeteer-nvim-puppeteer---credits*
+CREDITS                                    *puppeteer-nvim-puppeteer--credits*
 
 **About Me** In my day job, I am a sociologist studying the social mechanisms
 underlying the digital economy. For my PhD project, I investigate the
