@@ -1,4 +1,4 @@
-*puppeteer.txt*         For NVIM v0.8.0         Last change: 2023 September 26
+*puppeteer.txt*          For NVIM v0.8.0          Last change: 2023 October 08
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
@@ -7,6 +7,7 @@ Table of Contents                                *puppeteer-table-of-contents*
   - Features                              |puppeteer-nvim-puppeteer--features|
   - Requirements                      |puppeteer-nvim-puppeteer--requirements|
   - Installation                      |puppeteer-nvim-puppeteer--installation|
+  - Special Case: Formatted string in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-string-in-lua|
   - Credits                                |puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
@@ -17,12 +18,19 @@ Table of Contents                                *puppeteer-table-of-contents*
 Masterof strings. Automatically convert strings to f-strings or template
 strings and back.
 
+- |puppeteer-features|
+- |puppeteer-requirements|
+- |puppeteer-installation|
+- |puppeteer-special-case:-formatted-string-in-lua|
+- |puppeteer-credits|
+
 
 FEATURES                                  *puppeteer-nvim-puppeteer--features*
 
 - When typing `{}` in a python string, automatically convert it to an f-string.
 - When adding `${}` or a line break in a JavaScript string, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
 - When _removing_ the `{}`, `${}`, or line break, automatically convert it back to a regular string.
+- Opt-in: Typing `%s` in a non-pattern lua string, |puppeteer-automatically-converts-it-to-a-format-lua-string|.
 - Also works with multi-line strings.
 - No configuration needed, just install, and you are ready to go.
 
@@ -50,8 +58,45 @@ INSTALLATION                          *puppeteer-nvim-puppeteer--installation*
     }
 <
 
-No configuration or `.setup()` call is needed. The plugin already automatically
-loads as little as possible.
+There is no `.setup()` call. The plugin already automatically loads as little
+as possible.
+
+
+SPECIAL CASE: FORMATTED STRING IN LUA*puppeteer-nvim-puppeteer--special-case:-formatted-string-in-lua*
+
+Through string.format
+<https://www.lua.org/manual/5.4/manual.html#pdf-string.format>, there are also
+formatted strings in Lua. However, auto-conversions in lua are far more
+difficult since in Lua, `%s` is used as a placeholder for `string.format` and
+as class in lua patterns <https://www.lua.org/manual/5.4/manual.html#6.4.1> at
+the same time. While it is possible to identify in some cases whether a lua
+string is used as pattern, there are certain cases where that is not possible:
+
+>lua
+    -- desired: conversion to format string when typing the placeholder "%s"
+    local str = "foobar %s baz" -- before
+    local str = ("foobar %s baz"):format() -- after
+    
+    -- problem case that can be dealt with: "%s" used as class in lua pattern
+    local found = str:find("foobar %s")
+    
+    -- problem case that cannot be dealt with: "%s" in string, which
+    -- is only later used as pattern
+    local pattern = "foobar %s baz"
+    -- some code…
+    str:find(pattern)
+<
+
+Since auto-conversion of lua strings can result in undesired false conversions,
+auto-conversion, the feature is opt-in only, so you can decide for yourself
+whether the auto-conversion is worth it for you:
+
+>lua
+    -- enable auto-conversion of lua strings (default: false)
+    -- must be set before loading nvim-puppeteer
+    -- (e.g., in the `init` plugin spec of lazy.nvim)
+    vim.g.puppeteer_lua_format_string = true
+<
 
 
 CREDITS                                    *puppeteer-nvim-puppeteer--credits*
