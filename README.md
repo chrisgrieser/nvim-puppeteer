@@ -5,10 +5,21 @@
 
 Master of strings. Automatically convert strings to f-strings or template strings and back.
 
+<!-- toc -->
+
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Special case: Formatted string in Lua](#special-case-formatted-string-in-lua)
+- [Credits](#credits)
+
+<!-- tocstop -->
+
 ## Features
-- When typing `{}` in a python string, automatically convert it to an f-string. 
+- When typing `{}` in a python string, automatically convert it to an f-string.
 - When adding `${}` or a line break in a JavaScript string, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
 - When *removing* the `{}`, `${}`, or line break, automatically convert it back to a regular string.
+- Opt-in: Typing `%s` in a non-pattern lua string, [automatically converts it to a format lua string](#special-case-formatted-string-in-lua).
 - Also works with multi-line strings.
 - No configuration needed, just install, and you are ready to go.
 
@@ -33,7 +44,34 @@ use {
 }
 ```
 
-No configuration or `.setup()` call is needed. The plugin already automatically loads as little as possible.
+There is no `.setup()` call. The plugin already automatically loads as little as possible.
+
+## Special Case: Formatted string in Lua
+Through [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format), there are also formatted strings in Lua. However, auto-conversions in lua are far more difficult since in Lua, `%s` is used as a placeholder for `string.format` and [as class in lua patterns](https://www.lua.org/manual/5.4/manual.html#6.4.1) at the same time. While it is possible to identify in some cases whether a lua string is used as pattern, there are certain cases where that is not possible:
+
+```lua
+-- desired: conversion to format string when typing the placeholder "%s"
+local str = "foobar %s baz" -- before
+local str = ("foobar %s baz"):format() -- after
+
+-- problem case that can be dealt with: "%s" used as class in lua pattern
+local found = str:find("foobar %s")
+
+-- problem case that cannot be dealt with: "%s" in string, which
+-- is only later used as pattern
+local pattern = "foobar %s baz"
+-- some code…
+str:find(pattern)
+```
+
+Since auto-conversion of lua strings can result in undesired false conversions, auto-conversion, the feature is opt-in only, so you can decide for yourself whether the auto-conversion is worth it for you:
+
+```lua
+-- enable auto-conversion of lua strings (default: false)
+-- must be set before loading nvim-puppeteer
+-- (e.g., in the `init` plugin spec of lazy.nvim)
+vim.g.puppeteer_lua_format_string = true
+```
 
 ## Credits
 <!-- vale Google.FirstPerson = NO -->

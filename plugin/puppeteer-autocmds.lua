@@ -7,6 +7,7 @@ local supportedFiletypes = {
 	javascriptreact = "templateStr",
 	typescriptreact = "templateStr",
 	vue = "templateStr",
+	lua = "luaFormatStr",
 }
 
 vim.api.nvim_create_autocmd("FileType", {

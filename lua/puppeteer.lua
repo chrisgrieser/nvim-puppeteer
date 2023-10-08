@@ -89,5 +89,45 @@ function M.pythonFStr()
 	end
 end
 
+function M.luaFormatStr()
+	-- require explicit enabling by the user, since there are a few edge cases
+	-- when for lua format strings because a "%s" in a lua string can either be
+	-- a lua class pattern or a placeholder
+	if not vim.g.puppeteer_lua_format_string then return end
+
+	local node = getNodeAtCursor()
+	if not node then return end
+
+	local strNode
+	if node:type() == "string" then
+		strNode = node
+	elseif node:type():find("string_content") then
+		strNode = node:parent()
+	elseif node:type() == "escape_sequence" then
+		strNode = node:parent():parent()
+	else
+		return
+	end
+
+	-- GUARD: lua patterns (string.match, …) use `%s` as class patterns
+
+	-- this works with string.match() as well as var:match()
+	local stringMethod = strNode:parent()
+		and strNode:parent():prev_sibling()
+		and strNode:parent():prev_sibling():child(2)
+
+	local methodText = stringMethod and ts.get_node_text(stringMethod, 0) or ""
+	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
+	if isLuaPattern or methodText == "format" then return end
+
+	local text = ts.get_node_text(strNode, 0)
+	local hasPlaceholder = text:find("%%s") or text:find("%%q")
+	local isFormatString = strNode:parent():type() == "parenthesized_expression"
+
+	if hasPlaceholder and not isFormatString then
+		replaceNodeText(strNode, "(" .. text .. "):format()")
+	end
+end
+
 --------------------------------------------------------------------------------
 return M
