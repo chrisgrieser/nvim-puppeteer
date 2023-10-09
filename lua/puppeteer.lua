@@ -126,6 +126,11 @@ function M.luaFormatStr()
 
 	if hasPlaceholder and not isFormatString then
 		replaceNodeText(strNode, "(" .. text .. "):format()")
+	elseif not hasPlaceholder and isFormatString then
+		local formatCall = strNode:parent():parent():parent()
+		local formatCallText = ts.get_node_text(formatCall, 0)
+		local removedFormat = formatCallText:sub(2, -11)
+		replaceNodeText(formatCall, removedFormat)
 	end
 end
 
