@@ -10,7 +10,7 @@ Master of strings. Automatically convert strings to f-strings or template string
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Special case: Formatted string in Lua](#special-case-formatted-string-in-lua)
+- [Special Case: Formatted String in Lua](#special-case-formatted-string-in-lua)
 - [Credits](#credits)
 
 <!-- tocstop -->
@@ -46,7 +46,7 @@ use {
 
 There is no `.setup()` call. The plugin already automatically loads as little as possible.
 
-## Special Case: Formatted string in Lua
+## Special Case: Formatted String in Lua
 Through [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format), there are also formatted strings in Lua. However, auto-conversions in lua are far more difficult since in Lua, `%s` is used as a placeholder for `string.format` and [as class in lua patterns](https://www.lua.org/manual/5.4/manual.html#6.4.1) at the same time. While it is possible to identify in some cases whether a lua string is used as pattern, there are certain cases where that is not possible:
 
 ```lua
@@ -64,14 +64,15 @@ local pattern = "foobar %s baz"
 str:find(pattern)
 ```
 
-Since auto-conversion of lua strings can result in undesired false conversions, auto-conversion, the feature is opt-in only, so you can decide for yourself whether the auto-conversion is worth it for you:
+Since auto-conversion of lua strings can result in undesired false conversions, auto-conversion, the feature is opt-in only, so you can decide for yourself whether the auto-conversion is worth it for you.
 
 ```lua
 -- enable auto-conversion of lua strings (default: false)
--- must be set before loading nvim-puppeteer
--- (e.g., in the `init` plugin spec of lazy.nvim)
 vim.g.puppeteer_lua_format_string = true
 ```
+
+> [!NOTE]
+> After enabling, you can also set the variable to `false` temporarily to pause the auto-conversion. This can be useful if only one specific string gives you trouble.
 
 ## Credits
 <!-- vale Google.FirstPerson = NO -->
