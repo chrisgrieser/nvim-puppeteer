@@ -93,14 +93,14 @@ function M.pythonFStr()
 end
 
 function M.luaFormatStr()
-	-- require explicit enabling by the user, since there are a few edge cases
+	-- GUARD require explicit enabling by the user, since there are a few edge cases
 	-- when for lua format strings because a "%s" in a lua string can either be
 	-- a lua class pattern or a placeholder
 	if not vim.g.puppeteer_lua_format_string then return end
 
+	-- get string node
 	local node = getNodeAtCursor()
 	if not node then return end
-
 	local strNode
 	if node:type() == "string" then
 		strNode = node
@@ -113,16 +113,15 @@ function M.luaFormatStr()
 	end
 
 	-- GUARD: lua patterns (string.match, …) use `%s` as class patterns
-
 	-- this works with string.match() as well as var:match()
 	local stringMethod = strNode:parent()
 		and strNode:parent():prev_sibling()
 		and strNode:parent():prev_sibling():child(2)
-
 	local methodText = stringMethod and getNodeText(stringMethod) or ""
 	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
 	if isLuaPattern or methodText == "format" then return end
 
+	-- replace text
 	local text = getNodeText(strNode)
 	local hasPlaceholder = text:find("%%s") or text:find("%%q")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
