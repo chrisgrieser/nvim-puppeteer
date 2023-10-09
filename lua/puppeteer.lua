@@ -1,6 +1,5 @@
 local M = {}
-
-local ts = vim.treesitter
+--------------------------------------------------------------------------------
 
 ---@param node table
 ---@param replacementText string
@@ -13,12 +12,16 @@ end
 ---get node at cursor and validate that the user has at least nvim 0.9
 ---@return nil|table returns nil if no node or nvim version too old
 local function getNodeAtCursor()
-	if ts.get_node == nil then
+	if vim.treesitter.get_node == nil then
 		vim.notify("nvim-puppeteer requires at least nvim 0.9.", vim.log.levels.WARN)
 		return nil
 	end
-	return ts.get_node()
+	return vim.treesitter.get_node()
 end
+
+---@param node TSNode
+---@return string
+local function getNodeText(node) return vim.treesitter.get_node_text(node, 0) end
 
 --------------------------------------------------------------------------------
 
@@ -41,11 +44,11 @@ function M.templateStr()
 		return
 	end
 
-	local text = ts.get_node_text(strNode, 0)
+	local text = getNodeText(strNode)
 	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
 
 	local isTaggedTemplate = node:parent():type() == "call_expression"
-	local isMultilineString = ts.get_node_text(node, 0):find("[\n\r]")
+	local isMultilineString = getNodeText(strNode):find("[\n\r]")
 	local hasBraces = text:find("${%w.-}")
 
 	if not isTemplateStr and (hasBraces or isMultilineString) then
@@ -76,7 +79,7 @@ function M.pythonFStr()
 		return
 	end
 
-	local text = ts.get_node_text(strNode, 0)
+	local text = getNodeText(strNode)
 	local isFString = text:find("^f")
 	local hasBraces = text:find("{%w.-}")
 
@@ -116,11 +119,11 @@ function M.luaFormatStr()
 		and strNode:parent():prev_sibling()
 		and strNode:parent():prev_sibling():child(2)
 
-	local methodText = stringMethod and ts.get_node_text(stringMethod, 0) or ""
+	local methodText = stringMethod and getNodeText(stringMethod) or ""
 	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
 	if isLuaPattern or methodText == "format" then return end
 
-	local text = ts.get_node_text(strNode, 0)
+	local text = getNodeText(strNode)
 	local hasPlaceholder = text:find("%%s") or text:find("%%q")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
@@ -128,7 +131,7 @@ function M.luaFormatStr()
 		replaceNodeText(strNode, "(" .. text .. "):format()")
 	elseif not hasPlaceholder and isFormatString then
 		local formatCall = strNode:parent():parent():parent()
-		local formatCallText = ts.get_node_text(formatCall, 0)
+		local formatCallText = getNodeText(formatCall)
 		local removedFormat = formatCallText:sub(2, -11)
 		replaceNodeText(formatCall, removedFormat)
 	end
