@@ -92,6 +92,9 @@ function M.pythonFStr()
 	end
 end
 
+--------------------------------------------------------------------------------
+
+local luaFormattingActive = false
 function M.luaFormatStr()
 	-- GUARD require explicit enabling by the user, since there are a few edge cases
 	-- when for lua format strings because a "%s" in a lua string can either be
@@ -125,9 +128,14 @@ function M.luaFormatStr()
 	local text = getNodeText(strNode)
 	local hasPlaceholder = text:find("%%s") or text:find("%%q")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
-
 	if hasPlaceholder and not isFormatString then
+		-- HACK `luaFormattingActive` is used to prevent weird unexplainable
+		-- duplicate triggering. Not sure why it happens, the conditions should
+		-- prevent it – if anyone knows, feel free to make a PR…
+		if luaFormattingActive then return end
+		luaFormattingActive = true
 		replaceNodeText(strNode, "(" .. text .. "):format()")
+		vim.defer_fn(function() luaFormattingActive = false end, 100)
 	elseif not hasPlaceholder and isFormatString then
 		local formatCall = strNode:parent():parent():parent()
 		local formatCallText = getNodeText(formatCall)
