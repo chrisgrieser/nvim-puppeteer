@@ -1,4 +1,4 @@
-*puppeteer.txt*          For NVIM v0.8.0          Last change: 2023 October 08
+*puppeteer.txt*          For NVIM v0.8.0          Last change: 2023 October 09
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
@@ -7,7 +7,7 @@ Table of Contents                                *puppeteer-table-of-contents*
   - Features                              |puppeteer-nvim-puppeteer--features|
   - Requirements                      |puppeteer-nvim-puppeteer--requirements|
   - Installation                      |puppeteer-nvim-puppeteer--installation|
-  - Special Case: Formatted string in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-string-in-lua|
+  - Special Case: Formatted String in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-string-in-lua|
   - Credits                                |puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
@@ -89,15 +89,17 @@ string is used as pattern, there are certain cases where that is not possible:
 
 Since auto-conversion of lua strings can result in undesired false conversions,
 auto-conversion, the feature is opt-in only, so you can decide for yourself
-whether the auto-conversion is worth it for you:
+whether the auto-conversion is worth it for you.
 
 >lua
     -- enable auto-conversion of lua strings (default: false)
-    -- must be set before loading nvim-puppeteer
-    -- (e.g., in the `init` plugin spec of lazy.nvim)
     vim.g.puppeteer_lua_format_string = true
 <
 
+
+  [!NOTE] After enabling, you can also set the variable to `false` temporarily to
+  pause the auto-conversion. This can be useful if only one specific string gives
+  you trouble.
 
 CREDITS                                    *puppeteer-nvim-puppeteer--credits*
 
