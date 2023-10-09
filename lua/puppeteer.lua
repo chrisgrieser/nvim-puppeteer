@@ -1,7 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----@param node table
+---@param node TSNode
 ---@param replacementText string
 local function replaceNodeText(node, replacementText)
 	local startRow, startCol, endRow, endCol = node:range()
@@ -10,7 +10,7 @@ local function replaceNodeText(node, replacementText)
 end
 
 ---get node at cursor and validate that the user has at least nvim 0.9
----@return nil|table returns nil if no node or nvim version too old
+---@return nil|TSNode nil if no node or nvim version too old
 local function getNodeAtCursor()
 	if vim.treesitter.get_node == nil then
 		vim.notify("nvim-puppeteer requires at least nvim 0.9.", vim.log.levels.WARN)
