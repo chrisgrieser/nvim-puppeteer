@@ -30,9 +30,9 @@ FEATURES                                  *puppeteer-nvim-puppeteer--features*
 - When typing `{}` in a python string, automatically convert it to an f-string.
 - When adding `${}` or a line break in a JavaScript string, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
 - When _removing_ the `{}`, `${}`, or line break, automatically convert it back to a regular string.
-- Opt-in: Typing `%s` in a non-pattern lua string, |puppeteer-automatically-converts-it-to-a-format-lua-string|.
+- Opt-in: Typing `%s` in a non-pattern lua string, automatically converts it to a formatted string. |puppeteer-however,-take-note-of-the-the-caveats-for-thos.|.
 - Also works with multi-line strings.
-- No configuration needed, just install, and you are ready to go.
+- Zero configuration. Just install and you are ready to go.
 
 
 REQUIREMENTS                          *puppeteer-nvim-puppeteer--requirements*
