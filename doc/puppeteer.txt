@@ -7,7 +7,7 @@ Table of Contents                                *puppeteer-table-of-contents*
   - Features                              |puppeteer-nvim-puppeteer--features|
   - Requirements                      |puppeteer-nvim-puppeteer--requirements|
   - Installation                      |puppeteer-nvim-puppeteer--installation|
-  - Special Case: Formatted String in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-string-in-lua|
+  - Special Case: Formatted Strings in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
   - Credits                                |puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
@@ -21,7 +21,7 @@ strings and back.
 - |puppeteer-features|
 - |puppeteer-requirements|
 - |puppeteer-installation|
-- |puppeteer-special-case:-formatted-string-in-lua|
+- |puppeteer-special-case:-formatted-strings-in-lua|
 - |puppeteer-credits|
 
 
@@ -62,15 +62,15 @@ There is no `.setup()` call. The plugin already automatically loads as little
 as possible.
 
 
-SPECIAL CASE: FORMATTED STRING IN LUA*puppeteer-nvim-puppeteer--special-case:-formatted-string-in-lua*
+SPECIAL CASE: FORMATTED STRINGS IN LUA*puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua*
 
 Through string.format
 <https://www.lua.org/manual/5.4/manual.html#pdf-string.format>, there are also
-formatted strings in Lua. However, auto-conversions in lua are far more
-difficult since in Lua, `%s` is used as a placeholder for `string.format` and
-as class in lua patterns <https://www.lua.org/manual/5.4/manual.html#6.4.1> at
-the same time. While it is possible to identify in some cases whether a lua
-string is used as pattern, there are certain cases where that is not possible:
+formatted strings in Lua. However, auto-conversions are far more difficult in
+lua `%s` is used as a placeholder for `string.format` and as class in lua
+patterns <https://www.lua.org/manual/5.4/manual.html#6.4.1> at the same time.
+While it is possible to identify in some cases whether a lua string is used as
+pattern, there are certain cases where that is not possible:
 
 >lua
     -- desired: conversion to format string when typing the placeholder "%s"
@@ -87,9 +87,9 @@ string is used as pattern, there are certain cases where that is not possible:
     str:find(pattern)
 <
 
-Since auto-conversion of lua strings can result in undesired false conversions,
-auto-conversion, the feature is opt-in only, so you can decide for yourself
-whether the auto-conversion is worth it for you.
+Since the auto-conversion of lua strings can result in undesired false
+conversions, the feature is opt-in only. This way, you can decide for yourself
+whether the occasional false positive is worth it for you or not.
 
 >lua
     -- enable auto-conversion of lua strings (default: false)
