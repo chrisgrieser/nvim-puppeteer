@@ -19,9 +19,9 @@ Master of strings. Automatically convert strings to f-strings or template string
 - When typing `{}` in a python string, automatically convert it to an f-string.
 - When adding `${}` or a line break in a JavaScript string, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
 - When *removing* the `{}`, `${}`, or line break, automatically convert it back to a regular string.
-- Opt-in: Typing `%s` in a non-pattern lua string, [automatically converts it to a format lua string](#special-case-formatted-string-in-lua).
+- Opt-in: Typing `%s` in a non-pattern lua string, automatically converts it to a formatted string. [However, take note of the the caveats for thos.](#special-case-formatted-strings-in-lua).
 - Also works with multi-line strings.
-- No configuration needed, just install, and you are ready to go.
+- Zero configuration. Just install and you are ready to go.
 
 ## Requirements
 - nvim 0.9 or higher.
