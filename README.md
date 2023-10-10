@@ -10,7 +10,7 @@ Master of strings. Automatically convert strings to f-strings or template string
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Special Case: Formatted String in Lua](#special-case-formatted-string-in-lua)
+- [Special Case: Formatted Strings in Lua](#special-case-formatted-strings-in-lua)
 - [Credits](#credits)
 
 <!-- tocstop -->
@@ -46,8 +46,8 @@ use {
 
 There is no `.setup()` call. The plugin already automatically loads as little as possible.
 
-## Special Case: Formatted String in Lua
-Through [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format), there are also formatted strings in Lua. However, auto-conversions in lua are far more difficult since in Lua, `%s` is used as a placeholder for `string.format` and [as class in lua patterns](https://www.lua.org/manual/5.4/manual.html#6.4.1) at the same time. While it is possible to identify in some cases whether a lua string is used as pattern, there are certain cases where that is not possible:
+## Special Case: Formatted Strings in Lua
+Through [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format), there are also formatted strings in Lua. However, auto-conversions are far more difficult in lua `%s` is used as a placeholder for `string.format` and [as class in lua patterns](https://www.lua.org/manual/5.4/manual.html#6.4.1) at the same time. While it is possible to identify in some cases whether a lua string is used as pattern, there are certain cases where that is not possible:
 
 ```lua
 -- desired: conversion to format string when typing the placeholder "%s"
@@ -64,7 +64,7 @@ local pattern = "foobar %s baz"
 str:find(pattern)
 ```
 
-Since auto-conversion of lua strings can result in undesired false conversions, auto-conversion, the feature is opt-in only, so you can decide for yourself whether the auto-conversion is worth it for you.
+Since the auto-conversion of lua strings can result in undesired false conversions, the feature is opt-in only. This way, you can decide for yourself whether the occasional false positive is worth it for you or not.
 
 ```lua
 -- enable auto-conversion of lua strings (default: false)
