@@ -131,15 +131,14 @@ function M.luaFormatStr()
 	if hasPlaceholder and not isFormatString then
 		-- HACK `luaFormattingActive` is used to prevent weird unexplainable
 		-- duplicate triggering. Not sure why it happens, the conditions should
-		-- prevent it – if anyone knows, feel free to make a PR…
+		-- prevent it.
 		if luaFormattingActive then return end
 		luaFormattingActive = true
 		replaceNodeText(strNode, "(" .. text .. "):format()")
 		vim.defer_fn(function() luaFormattingActive = false end, 100)
 	elseif not hasPlaceholder and isFormatString then
 		local formatCall = strNode:parent():parent():parent()
-		local formatCallText = getNodeText(formatCall)
-		local removedFormat = formatCallText:sub(2, -11)
+		local removedFormat = getNodeText(formatCall):gsub("%((.*)%):format%(.*%)", "%1")
 		replaceNodeText(formatCall, removedFormat)
 	end
 end
