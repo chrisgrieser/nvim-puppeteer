@@ -49,7 +49,7 @@ function M.templateStr()
 
 	local isTaggedTemplate = node:parent():type() == "call_expression"
 	local isMultilineString = getNodeText(strNode):find("[\n\r]")
-	local hasBraces = text:find("${%w.-}")
+	local hasBraces = text:find("${.-}")
 
 	if not isTemplateStr and (hasBraces or isMultilineString) then
 		quotationMark = text:sub(1, 1) -- remember the quotation mark
@@ -81,7 +81,7 @@ function M.pythonFStr()
 
 	local text = getNodeText(strNode)
 	local isFString = text:find("^f")
-	local hasBraces = text:find("{%w.-}")
+	local hasBraces = text:find("{.-}")
 
 	if not isFString and hasBraces then
 		text = "f" .. text
