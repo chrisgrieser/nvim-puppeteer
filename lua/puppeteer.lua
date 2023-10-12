@@ -45,6 +45,8 @@ function M.templateStr()
 	end
 
 	local text = getNodeText(strNode)
+	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+
 	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
 
 	local isTaggedTemplate = node:parent():type() == "call_expression"
@@ -80,6 +82,8 @@ function M.pythonFStr()
 	end
 
 	local text = getNodeText(strNode)
+	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+
 	local isFString = text:find("^f")
 	local hasBraces = text:find("{.-}")
 
@@ -95,6 +99,7 @@ end
 --------------------------------------------------------------------------------
 
 local luaFormattingActive = false
+-- selene: allow(high_cyclomatic_complexity)
 function M.luaFormatStr()
 	-- GUARD require explicit enabling by the user, since there are a few edge cases
 	-- when for lua format strings because a "%s" in a lua string can either be
@@ -124,8 +129,10 @@ function M.luaFormatStr()
 	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
 	if isLuaPattern or methodText == "format" then return end
 
-	-- replace text
 	local text = getNodeText(strNode)
+	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+
+	-- replace text
 	local hasPlaceholder = text:find("%%s") or text:find("%%q")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 	if hasPlaceholder and not isFormatString then
