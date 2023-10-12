@@ -16,11 +16,11 @@ Master of strings. Automatically convert strings to f-strings or template string
 <!-- tocstop -->
 
 ## Features
-- When typing `{}` in a python string, automatically convert it to an f-string.
-- When adding `${}` or a line break in a JavaScript string, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
-- When *removing* the `{}`, `${}`, or line break, automatically convert it back to a regular string.
-- Opt-in: Typing `%s` in a non-pattern lua string, automatically converts it to a formatted string. [However, take note of the the caveats for thos.](#special-case-formatted-strings-in-lua).
-- Also works with multi-line strings.
+- When typing `{}` in a **Python string**, automatically convert it to an f-string.
+- Adding `${}` or a line break in a **JavaScript string**, automatically convert it to a template string. (Also works in related languages like JS-React or Typescript.)
+- Typing `%s` in a **non-pattern Lua string**, automatically converts it to a formatted string. (Opt-in, as this has [some caveats](#special-case-formatted-strings-in-lua).)
+- *Removing* the `{}`, `${}`, or `%s` automatically convert it back to a regular string.
+- Also works with multi-line strings and undos.
 - Zero configuration. Just install and you are ready to go.
 
 ## Requirements
