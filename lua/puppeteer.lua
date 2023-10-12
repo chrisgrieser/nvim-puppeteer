@@ -6,6 +6,7 @@ local M = {}
 local function replaceNodeText(node, replacementText)
 	local startRow, startCol, endRow, endCol = node:range()
 	local lines = vim.split(replacementText, "\n")
+	vim.cmd.undojoin() -- make undos ignore the next change, see issue #8
 	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end
 
