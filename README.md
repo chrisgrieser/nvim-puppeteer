@@ -25,7 +25,7 @@ Master of strings. Automatically convert strings to f-strings or template string
 
 ## Requirements
 - nvim 0.9 or higher.
-- The respective Treesitter parsers: `:TSInstall python javascript typescript`.
+- The respective Treesitter parsers: `:TSInstall python javascript typescript`. (Installing them requires [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).)
 
 ## Installation
 
@@ -33,15 +33,11 @@ Master of strings. Automatically convert strings to f-strings or template string
 -- lazy.nvim
 { 
 	"chrisgrieser/nvim-puppeteer",
-	dependencies = "nvim-treesitter/nvim-treesitter",
 	lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
 },
 
 -- packer
-use {
-	"chrisgrieser/nvim-puppeteer",
-	requires = "nvim-treesitter/nvim-treesitter",
-}
+use { "chrisgrieser/nvim-puppeteer" }
 ```
 
 There is no `.setup()` call. The plugin already automatically loads as little as possible.
