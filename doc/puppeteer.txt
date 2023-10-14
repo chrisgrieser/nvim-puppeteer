@@ -1,4 +1,4 @@
-*puppeteer.txt*          For NVIM v0.8.0          Last change: 2023 October 12
+*puppeteer.txt*          For NVIM v0.8.0          Last change: 2023 October 14
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
@@ -38,7 +38,7 @@ FEATURES                                  *puppeteer-nvim-puppeteer--features*
 REQUIREMENTS                          *puppeteer-nvim-puppeteer--requirements*
 
 - nvim 0.9 or higher.
-- The respective Treesitter parsers: `:TSInstall python javascript typescript`.
+- The respective Treesitter parsers: `:TSInstall python javascript typescript`. (Installing them requires nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter>.)
 
 
 INSTALLATION                          *puppeteer-nvim-puppeteer--installation*
@@ -47,15 +47,11 @@ INSTALLATION                          *puppeteer-nvim-puppeteer--installation*
     -- lazy.nvim
     { 
         "chrisgrieser/nvim-puppeteer",
-        dependencies = "nvim-treesitter/nvim-treesitter",
         lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
     },
     
     -- packer
-    use {
-        "chrisgrieser/nvim-puppeteer",
-        requires = "nvim-treesitter/nvim-treesitter",
-    }
+    use { "chrisgrieser/nvim-puppeteer" }
 <
 
 There is no `.setup()` call. The plugin already automatically loads as little
