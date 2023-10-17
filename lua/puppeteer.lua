@@ -134,9 +134,13 @@ function M.luaFormatStr()
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 
 	-- replace text
-	local hasPlaceholder = text:find("%%s") or text:find("%%q")
-	local isFormatString = strNode:parent():type() == "parenthesized_expression"
-	if hasPlaceholder and not isFormatString then
+	-- DOCS https://www.lua.org/manual/5.4/manual.html#pdf-string.format
+	-- https://www.lua.org/manual/5.4/manual.html#6.4.1
+	local hasPlaceholder = text:find("%%[sq]")
+	local likelyLuaPattern = text:find("%%[waudglpfb]")
+	local isFormatString = strNode:parent():type() == "parenthesized_expression" 
+
+	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
 		-- HACK `luaFormattingActive` is used to prevent weird unexplainable
 		-- duplicate triggering. Not sure why it happens, the conditions should
 		-- prevent it.
