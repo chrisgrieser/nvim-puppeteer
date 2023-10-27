@@ -137,7 +137,7 @@ function M.luaFormatStr()
 	-- DOCS https://www.lua.org/manual/5.4/manual.html#pdf-string.format
 	-- https://www.lua.org/manual/5.4/manual.html#6.4.1
 	local hasPlaceholder = text:find("%%[sq]")
-	local likelyLuaPattern = text:find("%%[waudglpfb]")
+	local likelyLuaPattern = text:find("%%[waudglpfb]") or text:find("%%s[*+-]")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression" 
 
 	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
