@@ -7,6 +7,7 @@ local supportedFiletypes = {
 	javascriptreact = "templateStr",
 	typescriptreact = "templateStr",
 	vue = "templateStr",
+	astro = "templateStr",
 	lua = "luaFormatStr",
 }
 
