@@ -85,8 +85,8 @@ function M.pythonFStr()
 	local text = getNodeText(strNode)
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 
-	local isFString = text:find("^f")
-	local hasBraces = text:find("{.-}")
+	local isFString = text:find("^f") or text:find("^rf") -- rf -> raw-formatted-string
+	local hasBraces = text:find("{.-[^%d].-}") -- braces w/ a non-digit (not matching regex `{3}`) #12
 
 	if not isFString and hasBraces then
 		text = "f" .. text
@@ -138,7 +138,7 @@ function M.luaFormatStr()
 	-- https://www.lua.org/manual/5.4/manual.html#6.4.1
 	local hasPlaceholder = text:find("%%[sq]")
 	local likelyLuaPattern = text:find("%%[waudglpfb]") or text:find("%%s[*+-]")
-	local isFormatString = strNode:parent():type() == "parenthesized_expression" 
+	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
 	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
 		-- HACK `luaFormattingActive` is used to prevent weird unexplainable
