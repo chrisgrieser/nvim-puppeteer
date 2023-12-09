@@ -85,8 +85,10 @@ function M.pythonFStr()
 	local text = getNodeText(strNode)
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 
-	local isFString = text:find("^f") or text:find("^rf") -- rf -> raw-formatted-string
-	local hasBraces = text:find("{.-[^%d].-}") -- braces w/ a non-digit (not matching regex `{3}`) #12
+	-- rf -> raw-formatted-string
+	local isFString = text:find("^f") or text:find("^rf") 
+	-- braces w/ non-digit (not matching regex `{3,}`), see #12
+	local hasBraces = text:find("{.-[^%d,].-}") 
 
 	if not isFString and hasBraces then
 		text = "f" .. text
