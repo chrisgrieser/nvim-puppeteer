@@ -86,9 +86,9 @@ function M.pythonFStr()
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 
 	-- rf -> raw-formatted-string
-	local isFString = text:find("^f") or text:find("^rf") 
+	local isFString = text:find("^f") or text:find("^rf")
 	-- braces w/ non-digit (not matching regex `{3,}`), see #12
-	local hasBraces = text:find("{.-[^%d,].-}") 
+	local hasBraces = text:find("{.-[^%d,].-}")
 
 	if not isFString and hasBraces then
 		text = "f" .. text
@@ -102,7 +102,6 @@ end
 --------------------------------------------------------------------------------
 
 local luaFormattingActive = false
--- selene: allow(high_cyclomatic_complexity)
 function M.luaFormatStr()
 	-- GUARD require explicit enabling by the user, since there are a few edge cases
 	-- when for lua format strings because a "%s" in a lua string can either be
