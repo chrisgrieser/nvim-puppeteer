@@ -148,7 +148,13 @@ function M.luaFormatStr()
 		-- prevent it.
 		if luaFormattingActive then return end
 		luaFormattingActive = true
+
 		replaceNodeText(strNode, "(" .. text .. "):format()")
+		-- move cursor so user can insert there directly
+		local row, col = strNode:end_()
+		vim.api.nvim_win_set_cursor(0, { row + 1, col + 1 })
+		vim.cmd.startinsert()
+
 		vim.defer_fn(function() luaFormattingActive = false end, 100)
 	elseif not hasPlaceholder and isFormatString then
 		local formatCall = strNode:parent():parent():parent()
