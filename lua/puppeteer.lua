@@ -151,7 +151,7 @@ function M.luaFormatStr()
 		replaceNodeText(strNode, "(" .. text .. "):format()")
 		-- move cursor so user can insert there directly
 		local row, col = strNode:end_()
-		vim.api.nvim_win_set_cursor(0, { row + 1, col + 1 })
+		vim.api.nvim_win_set_cursor(0, { row + 1, col - 1 })
 		vim.cmd.startinsert()
 
 		vim.defer_fn(function() luaFormattingActive = false end, 100)
