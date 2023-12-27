@@ -121,8 +121,10 @@ function M.luaFormatStr()
 	else
 		return
 	end
+	local text = getNodeText(strNode)
 
-	-- GUARD: lua patterns (string.match, …) use `%s` as class patterns
+	-- GUARD
+	-- 1) lua patterns (string.match, …) use `%s` as class patterns
 	-- this works with string.match() as well as var:match()
 	local stringMethod = strNode:parent()
 		and strNode:parent():prev_sibling()
@@ -130,24 +132,20 @@ function M.luaFormatStr()
 	local methodText = stringMethod and getNodeText(stringMethod) or ""
 	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
 	if isLuaPattern or methodText == "format" then return end
-
-	local text = getNodeText(strNode)
-
-	-- GUARD
-	-- don't convert empty strings, user might want to enter sth
+	-- 2) don't convert empty strings, user might want to enter sth
 	if text == "" then return end 
-	-- safeguard to prevent accidental triggers on invalid code
+	-- 3) safeguard to prevent accidental triggers on invalid code
 	if #text > 200 then return end 
 
-	-- replace text
-	-- DOCS https://www.lua.org/manual/5.4/manual.html#pdf-string.format
-	-- https://www.lua.org/manual/5.4/manual.html#6.4.1
+	-- REPLACE TEXT
+	-- string format: https://www.lua.org/manual/5.4/manual.html#pdf-string.format
+	-- patterns: https://www.lua.org/manual/5.4/manual.html#6.4.1
 	local hasPlaceholder = text:find("%%[sq]")
 	local likelyLuaPattern = text:find("%%[waudglpfb]") or text:find("%%s[*+-]")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
 	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
-		-- HACK `luaFormattingActive` is used to prevent weird unexplainable
+		-- HACK (1/2) `luaFormattingActive` is used to prevent weird unexplainable
 		-- duplicate triggering. Not sure why it happens, the conditions should
 		-- prevent it.
 		if luaFormattingActive then return end
@@ -159,6 +157,7 @@ function M.luaFormatStr()
 		vim.api.nvim_win_set_cursor(0, { row + 1, col - 1 })
 		vim.cmd.startinsert()
 
+		-- HACK (2/2)
 		vim.defer_fn(function() luaFormattingActive = false end, 100)
 	elseif not hasPlaceholder and isFormatString then
 		local formatCall = strNode:parent():parent():parent()
