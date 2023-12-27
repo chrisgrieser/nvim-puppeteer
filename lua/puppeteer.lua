@@ -132,7 +132,12 @@ function M.luaFormatStr()
 	if isLuaPattern or methodText == "format" then return end
 
 	local text = getNodeText(strNode)
-	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+
+	-- GUARD
+	-- don't convert empty strings, user might want to enter sth
+	if text == "" then return end 
+	-- safeguard to prevent accidental triggers on invalid code
+	if #text > 200 then return end 
 
 	-- replace text
 	-- DOCS https://www.lua.org/manual/5.4/manual.html#pdf-string.format
