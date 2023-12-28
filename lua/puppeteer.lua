@@ -6,7 +6,7 @@ local M = {}
 local function replaceNodeText(node, replacementText)
 	local startRow, startCol, endRow, endCol = node:range()
 	local lines = vim.split(replacementText, "\n")
-	vim.cmd.undojoin() -- make undos ignore the next change, see issue #8
+	pcall(vim.cmd.undojoin) -- make undos ignore the next change, see issue #8
 	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end
 
@@ -133,9 +133,9 @@ function M.luaFormatStr()
 	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
 	if isLuaPattern or methodText == "format" then return end
 	-- 2) don't convert empty strings, user might want to enter sth
-	if text == "" then return end 
+	if text == "" then return end
 	-- 3) safeguard to prevent accidental triggers on invalid code
-	if #text > 200 then return end 
+	if #text > 200 then return end
 
 	-- REPLACE TEXT
 	-- string format: https://www.lua.org/manual/5.4/manual.html#pdf-string.format
