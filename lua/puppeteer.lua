@@ -140,14 +140,14 @@ function M.luaFormatStr()
 	-- REPLACE TEXT
 	-- string format: https://www.lua.org/manual/5.4/manual.html#pdf-string.format
 	-- patterns: https://www.lua.org/manual/5.4/manual.html#6.4.1
-	local hasPlaceholder = text:find("%%[sq]")
+	local hasPlaceholder = text:find("%%[sq]") or text:find("%%06[Xx]")
 	local likelyLuaPattern = text:find("%%[waudglpfb]") or text:find("%%s[*+-]")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
 	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
-		-- HACK (1/2) `luaFormattingActive` is used to prevent weird unexplainable
-		-- duplicate triggering. Not sure why it happens, the conditions should
-		-- prevent it.
+		-- HACK (1/2) 
+		-- `luaFormattingActive` is used to prevent weird unexplainable duplicate
+		-- triggering. Not sure why it happens, the conditions should prevent it.
 		if luaFormattingActive then return end
 		luaFormattingActive = true
 
