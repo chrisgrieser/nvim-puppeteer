@@ -8,6 +8,7 @@ local supportedFiletypes = {
 	typescriptreact = "templateStr",
 	vue = "templateStr",
 	astro = "templateStr",
+	svelte = "templateStr",
 	lua = "luaFormatStr",
 }
 
