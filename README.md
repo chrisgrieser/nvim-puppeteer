@@ -51,6 +51,15 @@ use { "chrisgrieser/nvim-puppeteer" }
 There is no `.setup()` call. The plugin already automatically loads as little as
 possible.
 
+You can disable `nvim-puppeteer` only for specific filetypes via:
+```lua
+vim.g.puppeteer_disable_filetypes = { "python", "astro" }
+```
+
+> [!NOTE]
+> When using `lazy.nvim`, `vim.g.…` variables must be set in `init`, not in
+> `config`.
+
 ## Special Case: Formatted Strings in Lua
 Through
 [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format),

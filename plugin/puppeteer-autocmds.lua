@@ -12,6 +12,10 @@ local supportedFiletypes = {
 	lua = "luaFormatStr",
 }
 
+for _, ft in pairs(vim.g.puppeteer_disabled_filetypes or {}) do
+	supportedFiletypes[ft] = nil
+end
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(supportedFiletypes),
 	callback = function(ctx)
