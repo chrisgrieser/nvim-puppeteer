@@ -60,6 +60,16 @@ vim.g.puppeteer_disable_filetypes = { "python", "astro" }
 > When using `lazy.nvim`, `vim.g.…` variables must be set in `init`, not in
 > `config`.
 
+## User Commands
+
+The plugin is enabled by default and lazy-loaded upon opening a relevant file type.
+In case you wish to turn of puppeteer for the current buffer, the following user
+commands are provided:
+
+- `PuppeteerToggle`: Toggle puppeteer for the current buffer.
+- `PuppeteerDisable`: Enable puppeteer for the current buffer.
+- `PuppeteerEnable`: Enable puppeteer for the current buffer.
+
 ## Special Case: Formatted Strings in Lua
 Through
 [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format),
