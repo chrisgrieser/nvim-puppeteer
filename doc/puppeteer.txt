@@ -72,6 +72,16 @@ You can disable `nvim-puppeteer` only for specific filetypes via:
   [!NOTE] When using `lazy.nvim`, `vim.g.…` variables must be set in `init`,
   not in `config`.
 
+USER COMMANDS                        *puppeteer-nvim-puppeteer--user-commands*
+
+The plugin is enabled by default and lazy-loaded upon opening a relevant file type.
+In case you wish to turn of puppeteer for the current buffer, the following user
+commands are provided:
+
+- `PuppeteerToggle`: Toggle puppeteer for the current buffer.
+- `PuppeteerDisable`: Enable puppeteer for the current buffer.
+- `PuppeteerEnable`: Enable puppeteer for the current buffer.
+
 SPECIAL CASE: FORMATTED STRINGS IN LUA*puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua*
 
 Through string.format
