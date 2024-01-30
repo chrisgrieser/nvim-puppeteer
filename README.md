@@ -61,13 +61,12 @@ vim.g.puppeteer_disable_filetypes = { "python", "astro" }
 > `config`.
 
 ## User Commands
-
 The plugin is enabled by default and lazy-loaded upon opening a relevant file type.
 In case you wish to turn of puppeteer for the current buffer, the following user
 commands are provided:
 
 - `PuppeteerToggle`: Toggle puppeteer for the current buffer.
-- `PuppeteerDisable`: Enable puppeteer for the current buffer.
+- `PuppeteerDisable`: Disable puppeteer for the current buffer.
 - `PuppeteerEnable`: Enable puppeteer for the current buffer.
 
 ## Special Case: Formatted Strings in Lua
