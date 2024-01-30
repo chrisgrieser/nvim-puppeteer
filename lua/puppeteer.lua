@@ -88,7 +88,7 @@ function M.pythonFStr()
 	-- rf -> raw-formatted-string
 	local isFString = text:find("^f") or text:find("^rf")
 	-- braces w/ non-digit (not matching regex `{3,}`), see #12
-	local hasBraces = text:find("{.-[^%d,].-}")
+	local hasBraces = text:find("{[^%s].-[^%d,%s].-}")
 
 	if not isFString and hasBraces then
 		text = "f" .. text
