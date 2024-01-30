@@ -1,4 +1,4 @@
-*puppeteer.txt*          For NVIM v0.8.0          Last change: 2024 January 27
+*puppeteer.txt*          For NVIM v0.8.0          Last change: 2024 January 30
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
@@ -7,6 +7,7 @@ Table of Contents                                *puppeteer-table-of-contents*
   - Features                              |puppeteer-nvim-puppeteer--features|
   - Requirements                      |puppeteer-nvim-puppeteer--requirements|
   - Installation                      |puppeteer-nvim-puppeteer--installation|
+  - User Commands                    |puppeteer-nvim-puppeteer--user-commands|
   - Special Case: Formatted Strings in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
   - Credits                                |puppeteer-nvim-puppeteer--credits|
 
@@ -74,13 +75,14 @@ You can disable `nvim-puppeteer` only for specific filetypes via:
 
 USER COMMANDS                        *puppeteer-nvim-puppeteer--user-commands*
 
-The plugin is enabled by default and lazy-loaded upon opening a relevant file type.
-In case you wish to turn of puppeteer for the current buffer, the following user
-commands are provided:
+The plugin is enabled by default and lazy-loaded upon opening a relevant file
+type. In case you wish to turn of puppeteer for the current buffer, the
+following user commands are provided:
 
-- `PuppeteerToggle`: Toggle puppeteer for the current buffer.
-- `PuppeteerDisable`: Enable puppeteer for the current buffer.
-- `PuppeteerEnable`: Enable puppeteer for the current buffer.
+- `PuppeteerToggle`Toggle puppeteer for the current buffer.
+- `PuppeteerDisable`Enable puppeteer for the current buffer.
+- `PuppeteerEnable`Enable puppeteer for the current buffer.
+
 
 SPECIAL CASE: FORMATTED STRINGS IN LUA*puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua*
 
