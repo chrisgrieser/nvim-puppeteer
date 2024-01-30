@@ -12,6 +12,7 @@ strings and back.
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [User Commands](#user-commands)
 - [Special Case: Formatted Strings in Lua](#special-case-formatted-strings-in-lua)
 - [Credits](#credits)
 
@@ -48,10 +49,11 @@ strings and back.
 use { "chrisgrieser/nvim-puppeteer" }
 ```
 
-There is no `.setup()` call. The plugin already automatically loads as little as
-possible.
+There is no `.setup()` call. The plugin already automatically lazy-loads itself 
+(and is very lightweight to begin with).
 
 You can disable `nvim-puppeteer` only for specific filetypes via:
+
 ```lua
 vim.g.puppeteer_disable_filetypes = { "python", "astro" }
 ```
@@ -102,13 +104,12 @@ whether the occasional false positive is worth it for you or not.
 vim.g.puppeteer_lua_format_string = true
 ```
 
-> [!NOTE]
-> After enabling, you can also set the variable to `false` temporarily to pause
-> the auto-conversion. This can be useful if only one specific string gives you
-> trouble.
+> [!TIP]
+> You can use `PuppeteerToggle` to temporarily disable the plugin for the
+> current buffer, if a specific lua string is giving you trouble. 
 
-## Credits
 <!-- vale Google.FirstPerson = NO -->
+## Credits
 **About Me**  
 In my day job, I am a sociologist studying the social mechanisms underlying the
 digital economy. For my PhD project, I investigate the governance of the app
