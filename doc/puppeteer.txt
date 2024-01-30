@@ -22,6 +22,7 @@ strings and back.
 - |puppeteer-features|
 - |puppeteer-requirements|
 - |puppeteer-installation|
+- |puppeteer-user-commands|
 - |puppeteer-special-case:-formatted-strings-in-lua|
 - |puppeteer-credits|
 
@@ -60,8 +61,8 @@ INSTALLATION                          *puppeteer-nvim-puppeteer--installation*
     use { "chrisgrieser/nvim-puppeteer" }
 <
 
-There is no `.setup()` call. The plugin already automatically loads as little
-as possible.
+There is no `.setup()` call. The plugin already automatically lazy-loads itself
+(and is very lightweight to begin with).
 
 You can disable `nvim-puppeteer` only for specific filetypes via:
 
@@ -80,7 +81,7 @@ type. In case you wish to turn of puppeteer for the current buffer, the
 following user commands are provided:
 
 - `PuppeteerToggle`Toggle puppeteer for the current buffer.
-- `PuppeteerDisable`Enable puppeteer for the current buffer.
+- `PuppeteerDisable`Disable puppeteer for the current buffer.
 - `PuppeteerEnable`Enable puppeteer for the current buffer.
 
 
@@ -119,9 +120,8 @@ whether the occasional false positive is worth it for you or not.
 <
 
 
-  [!NOTE] After enabling, you can also set the variable to `false` temporarily to
-  pause the auto-conversion. This can be useful if only one specific string gives
-  you trouble.
+  [!TIP] You can use `PuppeteerToggle` to temporarily disable the plugin for the
+  current buffer, if a specific lua string is giving you trouble.
 
 CREDITS                                    *puppeteer-nvim-puppeteer--credits*
 
