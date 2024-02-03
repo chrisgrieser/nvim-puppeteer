@@ -94,7 +94,7 @@ function M.pythonFStr()
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
-	-- rf -> raw-formatted-string
+	local isFString = text:find("^r?f") -- rf -> raw-formatted-string
 	local hasBraces = text:find("{.-[^%d,%s].-}") -- nonRegex-braces, see #12 and #15
 
 	if not isFString and hasBraces then
@@ -131,7 +131,7 @@ function M.luaFormatStr()
 	local text = getNodeText(strNode)
 
 	-- GUARD
-	-- 1) lua patterns (string.match, …) use `%s` as class patterns
+	-- lua patterns (string.match, …) use `%s` as class patterns
 	-- this works with string.match() as well as var:match()
 	local stringMethod = strNode:parent()
 		and strNode:parent():prev_sibling()
@@ -150,7 +150,7 @@ function M.luaFormatStr()
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
 	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
-		-- HACK (1/2) 
+		-- HACK (1/2)
 		-- `luaFormattingActive` is used to prevent weird unexplainable duplicate
 		-- triggering. Not sure why it happens, the conditions should prevent it.
 		if luaFormattingActive then return end
