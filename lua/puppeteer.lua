@@ -26,6 +26,11 @@ local function getNodeText(node) return vim.treesitter.get_node_text(node, 0) en
 
 --------------------------------------------------------------------------------
 
+-- CONFIG
+local maxCharacters = 200 -- safeguard to prevent converting invalid code
+
+--------------------------------------------------------------------------------
+
 -- auto-convert string to template string and back
 function M.templateStr()
 	local node = getNodeAtCursor()
@@ -44,9 +49,11 @@ function M.templateStr()
 	else
 		return
 	end
-
 	local text = getNodeText(strNode)
+
+	-- GUARD
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
 	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
 
@@ -81,9 +88,11 @@ function M.pythonFStr()
 	else
 		return
 	end
-
 	local text = getNodeText(strNode)
+
+	-- GUARD
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
 	-- rf -> raw-formatted-string
 	local hasBraces = text:find("{.-[^%d,%s].-}") -- nonRegex-braces, see #12 and #15
@@ -130,10 +139,8 @@ function M.luaFormatStr()
 	local methodText = stringMethod and getNodeText(stringMethod) or ""
 	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
 	if isLuaPattern or methodText == "format" then return end
-	-- 2) don't convert empty strings, user might want to enter sth
-	if text == "" then return end
-	-- 3) safeguard to prevent accidental triggers on invalid code
-	if #text > 200 then return end
+	if text == "" then return end -- don't convert empty strings, user might want to enter sth
+	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
 	-- REPLACE TEXT
 	-- string format: https://www.lua.org/manual/5.4/manual.html#pdf-string.format
