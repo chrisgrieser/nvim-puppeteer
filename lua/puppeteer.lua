@@ -55,14 +55,14 @@ function M.templateStr()
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
-	local quotationMark = '"' -- default value when no quotation mark has been deleted yet
+	-- default value when no quotation mark has been deleted yet
+	local quotationMark = vim.g.puppeteer_js_quotation_mark == "'" and "'" or '"'
 
 	local isTaggedTemplate = node:parent():type() == "call_expression"
 	local isMultilineString = getNodeText(strNode):find("[\n\r]")
 	local hasBraces = text:find("${.-}")
 
 	if not isTemplateStr and (hasBraces or isMultilineString) then
-		quotationMark = text:sub(1, 1) -- remember the quotation mark
 		text = "`" .. text:sub(2, -2) .. "`"
 		replaceNodeText(strNode, text)
 	elseif isTemplateStr and not (hasBraces or isMultilineString or isTaggedTemplate) then

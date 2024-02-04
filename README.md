@@ -12,6 +12,7 @@ strings and back.
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Configuration](#configuration)
 - [User Commands](#user-commands)
 - [Special Case: Formatted Strings in Lua](#special-case-formatted-strings-in-lua)
 - [Credits](#credits)
@@ -54,8 +55,15 @@ There is no `.setup()` call. The plugin already automatically lazy-loads itself
 
 You can disable `nvim-puppeteer` only for specific filetypes via:
 
+## Configuration
+Shown are the default values.
+
 ```lua
-vim.g.puppeteer_disable_filetypes = { "python", "astro" }
+-- list of filestypes
+vim.g.puppeteer_disable_filetypes = {} 
+
+-- quotation mark to use when converting back to normal string (" or ')
+vim.g.puppeteer_js_quotation_mark = '"'
 ```
 
 > [!NOTE]
