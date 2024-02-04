@@ -1,4 +1,4 @@
-*puppeteer.txt*          For NVIM v0.8.0         Last change: 2024 February 03
+*puppeteer.txt*          For NVIM v0.8.0         Last change: 2024 February 04
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
@@ -7,6 +7,7 @@ Table of Contents                                *puppeteer-table-of-contents*
   - Features                              |puppeteer-nvim-puppeteer--features|
   - Requirements                      |puppeteer-nvim-puppeteer--requirements|
   - Installation                      |puppeteer-nvim-puppeteer--installation|
+  - Configuration                    |puppeteer-nvim-puppeteer--configuration|
   - User Commands                    |puppeteer-nvim-puppeteer--user-commands|
   - Special Case: Formatted Strings in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
   - Credits                                |puppeteer-nvim-puppeteer--credits|
@@ -22,6 +23,7 @@ strings and back.
 - |puppeteer-features|
 - |puppeteer-requirements|
 - |puppeteer-installation|
+- |puppeteer-configuration|
 - |puppeteer-user-commands|
 - |puppeteer-special-case:-formatted-strings-in-lua|
 - |puppeteer-credits|
@@ -66,8 +68,17 @@ There is no `.setup()` call. The plugin already automatically lazy-loads itself
 
 You can disable `nvim-puppeteer` only for specific filetypes via:
 
+
+CONFIGURATION                        *puppeteer-nvim-puppeteer--configuration*
+
+Shown are the default values.
+
 >lua
-    vim.g.puppeteer_disable_filetypes = { "python", "astro" }
+    -- list of filestypes
+    vim.g.puppeteer_disable_filetypes = {} 
+    
+    -- quotation mark to use when converting back to normal string (" or ')
+    vim.g.puppeteer_js_quotation_mark = '"'
 <
 
 
