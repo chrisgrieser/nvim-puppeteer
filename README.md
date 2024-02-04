@@ -50,8 +50,8 @@ strings and back.
 use { "chrisgrieser/nvim-puppeteer" }
 ```
 
-There is no `.setup()` call. The plugin already automatically lazy-loads itself 
-(and is very lightweight to begin with).
+There is no `.setup()` call. The plugin already automatically lazy-loads itself
+(and is lightweight to begin with).
 
 You can disable `nvim-puppeteer` only for specific filetypes via:
 
@@ -114,7 +114,7 @@ vim.g.puppeteer_lua_format_string = true
 
 > [!TIP]
 > You can use `PuppeteerToggle` to temporarily disable the plugin for the
-> current buffer, if a specific lua string is giving you trouble. 
+> current buffer, if a specific lua string is giving you trouble.
 
 <!-- vale Google.FirstPerson = NO -->
 ## Credits
