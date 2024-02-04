@@ -110,12 +110,6 @@ end
 
 local luaFormattingActive = false
 function M.luaFormatStr()
-	-- GUARD require explicit enabling by the user, since there are a few edge cases
-	-- when for lua format strings because a "%s" in a lua string can either be
-	-- a lua class pattern or a placeholder
-	if not vim.g.puppeteer_lua_format_string then return end
-
-	-- get string node
 	local node = getNodeAtCursor()
 	if not node then return end
 	local strNode

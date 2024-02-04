@@ -59,8 +59,8 @@ You can disable `nvim-puppeteer` only for specific filetypes via:
 Shown are the default values.
 
 ```lua
--- list of filestypes
-vim.g.puppeteer_disable_filetypes = {} 
+-- list of filestypes (please see the README before enabling this plugin for lua)
+vim.g.puppeteer_disable_filetypes = { "lua" }
 
 -- quotation mark to use when converting back to normal string (" or ')
 vim.g.puppeteer_js_quotation_mark = '"'
@@ -108,12 +108,13 @@ conversions, the feature is opt-in only. This way, you can decide for yourself
 whether the occasional false positive is worth it for you or not.
 
 ```lua
--- enable auto-conversion of lua strings (default: false)
-vim.g.puppeteer_lua_format_string = true
+-- Enable auto-conversion of lua strings by removing lua from the disabled
+-- filetypes (default: {"lua"}).
+vim.g.puppeteer_disable_filetypes = {}
 ```
 
 > [!TIP]
-> You can use `PuppeteerToggle` to temporarily disable the plugin for the
+> You can also use `PuppeteerToggle` to temporarily disable the plugin for the
 > current buffer, if a specific lua string is giving you trouble.
 
 <!-- vale Google.FirstPerson = NO -->
