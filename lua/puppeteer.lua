@@ -35,41 +35,30 @@ local maxCharacters = 200 -- safeguard to prevent converting invalid code
 function M.templateStr()
 	local node = getNodeAtCursor()
 	if not node then return end
+	if node:type() == "string_fragment" or node:type() == "escape_sequence" then node = node:parent() end
 
-	local strNode, isTemplateStr
-	if node:type() == "string" then
-		strNode = node
-		isTemplateStr = false
-	elseif node:type() == "string_fragment" or node:type() == "escape_sequence" then
-		strNode = node:parent()
-		isTemplateStr = false
-	elseif node:type() == "template_string" then
-		strNode = node
-		isTemplateStr = true
-	else
-		return
-	end
-	local text = getNodeText(strNode)
+	-- GUARD non-string node
+	if not (node:type() == "string" or node:type() == "template_string") then return end
+
+	local isTemplateStr = node:type() == "template_string"
+	local text = getNodeText(node)
 
 	-- GUARD
-	if text == "" then return end -- don't convert empty strings, user might want to enter sth
-	if #text > maxCharacters then return end -- safeguard on converting invalid code
-
-	-- default value when no quotation mark has been deleted yet
-	local quotationMark = vim.g.puppeteer_js_quotation_mark == "'" and "'" or '"'
+	-- don't convert empty strings, user might want to enter sth
+	-- safeguard on converting invalid code
+	if text == "" or #text > maxCharacters then return end
 
 	local isTaggedTemplate = node:parent():type() == "call_expression"
-	local isMultilineString = getNodeText(strNode):find("[\n\r]")
+	local isMultilineString = text:find("[\n\r]")
 	local hasBraces = text:find("${.-}")
 
 	if not isTemplateStr and (hasBraces or isMultilineString) then
 		text = "`" .. text:sub(2, -2) .. "`"
-		replaceNodeText(strNode, text)
+		replaceNodeText(node, text)
 	elseif isTemplateStr and not (hasBraces or isMultilineString or isTaggedTemplate) then
-		-- INFO taggedTemplate and multilineString have no ${}, but we still want
-		-- to keep the template
-		text = quotationMark .. text:sub(2, -2) .. quotationMark
-		replaceNodeText(strNode, text)
+		local quote = vim.g.puppeteer_js_quotation_mark == "'" and "'" or '"'
+		text = quote .. text:sub(2, -2) .. quote
+		replaceNodeText(node, text)
 	end
 end
 
