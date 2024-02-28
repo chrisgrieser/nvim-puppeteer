@@ -1,4 +1,4 @@
-*puppeteer.txt*          For NVIM v0.8.0         Last change: 2024 February 24
+*puppeteer.txt*          For NVIM v0.8.0         Last change: 2024 February 28
 
 ==============================================================================
 Table of Contents                                *puppeteer-table-of-contents*
