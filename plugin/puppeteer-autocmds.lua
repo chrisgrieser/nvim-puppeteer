@@ -27,8 +27,16 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 			buffer = 0,
-			callback = function()
-				if vim.b.puppeteer_enabled ~= false then stringTransformFunc() end
+			callback = function(ctx2)
+				local bufnr = ctx2.buf
+				if
+					vim.b.puppeteer_enabled == false
+					or vim.bo[bufnr].buftype ~= ""
+					or vim.api.nvim_buf_is_valid(bufnr)
+				then
+					return
+				end
+				stringTransformFunc()
 			end,
 		})
 	end,
