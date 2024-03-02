@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
 				if
 					vim.b.puppeteer_enabled == false
 					or vim.bo[bufnr].buftype ~= ""
-					or vim.api.nvim_buf_is_valid(bufnr)
+					or not(vim.api.nvim_buf_is_valid(bufnr))
 				then
 					return
 				end
