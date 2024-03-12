@@ -41,8 +41,9 @@ function M.templateStr()
 	-- GUARD non-string node
 	if not (node:type() == "string" or node:type() == "template_string") then return end
 
-	local isTemplateStr = node:type() == "template_string"
 	local text = getNodeText(node)
+	-- not checking via node-type, since treesitter sometimes does not update that in time
+	local isTemplateStr = text:find("^`.*`$")
 
 	-- GUARD
 	-- don't convert empty strings (user might want to enter sth)
