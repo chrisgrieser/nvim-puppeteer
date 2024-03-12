@@ -36,7 +36,8 @@ vim.api.nvim_create_autocmd("FileType", {
 				then
 					return
 				end
-				stringTransformFunc()
+				-- deferred to prevent race conditions with other autocmds
+				vim.defer_fn(stringTransformFunc, 1)
 			end,
 		})
 	end,
