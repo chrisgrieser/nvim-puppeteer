@@ -27,7 +27,8 @@ local function getNodeText(node) return vim.treesitter.get_node_text(node, 0) en
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local maxCharacters = 200 -- safeguard to prevent converting invalid code
+-- safeguard to prevent converting invalid code
+local maxCharacters = 200 
 
 --------------------------------------------------------------------------------
 
@@ -44,13 +45,12 @@ function M.templateStr()
 	local text = getNodeText(node)
 
 	-- GUARD
-	-- don't convert empty strings, user might want to enter sth
-	-- safeguard on converting invalid code
+	-- don't convert empty strings (user might want to enter sth)
 	if text == "" or #text > maxCharacters then return end
 
 	local isTaggedTemplate = node:parent():type() == "call_expression"
 	local isMultilineString = text:find("[\n\r]")
-	local hasBraces = text:find("${.-}")
+	local hasBraces = text:find("%${.-}")
 
 	if not isTemplateStr and (hasBraces or isMultilineString) then
 		text = "`" .. text:sub(2, -2) .. "`"
