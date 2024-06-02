@@ -37,6 +37,7 @@ function M.templateStr()
 	local node = getNodeAtCursor()
 	if not node then return end
 	if node:type() == "string_fragment" or node:type() == "escape_sequence" then node = node:parent() end
+	if not node then return end
 	local text = getNodeText(node)
 
 	if
@@ -78,6 +79,7 @@ function M.pythonFStr()
 	else
 		return
 	end
+	if not strNode then return end
 	local text = getNodeText(strNode)
 
 	-- GUARD
@@ -112,6 +114,7 @@ function M.luaFormatStr()
 	else
 		return
 	end
+	if not strNode then return end
 	local text = getNodeText(strNode)
 
 	-- GUARD
@@ -150,6 +153,7 @@ function M.luaFormatStr()
 		vim.defer_fn(function() luaFormattingActive = false end, 100)
 	elseif not hasPlaceholder and isFormatString then
 		local formatCall = strNode:parent():parent():parent()
+		if not formatCall then return end
 		local removedFormat = getNodeText(formatCall):gsub("%((.*)%):format%(.*%)", "%1")
 		replaceNodeText(formatCall, removedFormat)
 	end
