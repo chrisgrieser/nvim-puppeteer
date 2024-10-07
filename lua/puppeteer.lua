@@ -6,7 +6,7 @@ local M = {}
 local function replaceNodeText(node, replacementText)
 	local startRow, startCol, endRow, endCol = node:range()
 	local lines = vim.split(replacementText, "\n")
-	pcall(vim.cmd.undojoin) -- make undos ignore the next change, see issue #8
+	pcall(vim.cmd.undojoin) -- make undos ignore the next change, see #8
 	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end
 
@@ -15,7 +15,7 @@ end
 local function getNodeAtCursor()
 	if vim.treesitter.get_node == nil then
 		vim.notify("nvim-puppeteer requires at least nvim 0.9.", vim.log.levels.WARN)
-		return nil
+		return
 	end
 	return vim.treesitter.get_node()
 end
@@ -124,19 +124,19 @@ function M.luaFormatStr()
 		and strNode:parent():prev_sibling()
 		and strNode:parent():prev_sibling():child(2)
 	local methodText = stringMethod and getNodeText(stringMethod) or ""
-	local isLuaPattern = methodText:find("g?match") or methodText == "find" or methodText == "gsub"
-	if isLuaPattern or methodText == "format" then return end
+	local isLuaPattern = vim.tbl_contains({ "match", "gmatch", "find", "gsub" }, methodText)
+	local likelyLuaPattern = text:find("%%[waudglpfb]") or text:find("%%s[*+-]")
+	if isLuaPattern or likelyLuaPattern then return end
 	if text == "" then return end -- don't convert empty strings, user might want to enter sth
 	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
 	-- REPLACE TEXT
 	-- string format: https://www.lua.org/manual/5.4/manual.html#pdf-string.format
 	-- patterns: https://www.lua.org/manual/5.4/manual.html#6.4.1
-	local hasPlaceholder = text:find("%%[sq]") or text:find("%%06[Xx]")
-	local likelyLuaPattern = text:find("%%[waudglpfb]") or text:find("%%s[*+-]")
+	local hasPlaceholder = (text:find("%%[sq]") and not text:find("%%s[*+-]")) or text:find("%%06[Xx]")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
-	if hasPlaceholder and not (isFormatString or likelyLuaPattern) then
+	if hasPlaceholder and not isFormatString then
 		-- HACK (1/2)
 		-- `luaFormattingActive` is used to prevent weird unexplainable duplicate
 		-- triggering. Not sure why it happens, the conditions should prevent it.
@@ -151,7 +151,7 @@ function M.luaFormatStr()
 
 		-- HACK (2/2)
 		vim.defer_fn(function() luaFormattingActive = false end, 100)
-	elseif not hasPlaceholder and isFormatString then
+	elseif isFormatString and not hasPlaceholder then
 		local formatCall = strNode:parent():parent():parent()
 		if not formatCall then return end
 		local removedFormat = getNodeText(formatCall):gsub("%((.*)%):format%(.*%)", "%1")
