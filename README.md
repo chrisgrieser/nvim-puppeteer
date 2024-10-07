@@ -13,8 +13,8 @@ strings and back.
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [User Commands](#user-commands)
-- [Special Case: Formatted Strings in Lua](#special-case-formatted-strings-in-lua)
+- [User commands](#user-commands)
+- [Special case: formatted strings in Lua](#special-case-formatted-strings-in-lua)
 - [Credits](#credits)
 
 <!-- tocstop -->
@@ -70,7 +70,7 @@ vim.g.puppeteer_js_quotation_mark = '"'
 > When using `lazy.nvim`, `vim.g.…` variables must be set in `init`, not in
 > `config`.
 
-## User Commands
+## User commands
 The plugin is enabled by default and lazy-loaded upon opening a relevant file type.
 In case you wish to turn of puppeteer for the current buffer, the following user
 commands are provided:
@@ -79,7 +79,7 @@ commands are provided:
 - `PuppeteerDisable`: Disable puppeteer for the current buffer.
 - `PuppeteerEnable`: Enable puppeteer for the current buffer.
 
-## Special Case: Formatted Strings in Lua
+## Special case: formatted strings in Lua
 Through
 [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format),
 there are also formatted strings in Lua. However, auto-conversions are far more
@@ -108,8 +108,7 @@ conversions, the feature is opt-in only. This way, you can decide for yourself
 whether the occasional false positive is worth it for you or not.
 
 ```lua
--- Enable auto-conversion of lua strings by removing lua from the disabled
--- filetypes (default: {"lua"}).
+-- Enable auto-conversion of lua strings by removing lua from the disabled filetypes
 vim.g.puppeteer_disable_filetypes = {}
 ```
 
@@ -119,20 +118,14 @@ vim.g.puppeteer_disable_filetypes = {}
 
 <!-- vale Google.FirstPerson = NO -->
 ## Credits
-**About Me**  
 In my day job, I am a sociologist studying the social mechanisms underlying the
 digital economy. For my PhD project, I investigate the governance of the app
 economy and how software ecosystems manage the tension between innovation and
 compatibility. If you are interested in this subject, feel free to get in touch.
 
-**Blog**  
 I also occasionally blog about vim: [Nano Tips for Vim](https://nanotipsforvim.prose.sh)
 
-**Profiles**  
-- [reddit](https://www.reddit.com/user/pseudometapseudo)
-- [Discord](https://discordapp.com/users/462774483044794368/)
 - [Academic Website](https://chris-grieser.de/)
-- [Twitter](https://twitter.com/pseudo_meta)
 - [Mastodon](https://pkm.social/@pseudometa)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
