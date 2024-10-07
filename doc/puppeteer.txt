@@ -8,8 +8,8 @@ Table of Contents                                *puppeteer-table-of-contents*
   - Requirements                      |puppeteer-nvim-puppeteer--requirements|
   - Installation                      |puppeteer-nvim-puppeteer--installation|
   - Configuration                    |puppeteer-nvim-puppeteer--configuration|
-  - User Commands                    |puppeteer-nvim-puppeteer--user-commands|
-  - Special Case: Formatted Strings in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
+  - User commands                    |puppeteer-nvim-puppeteer--user-commands|
+  - Special case: formatted strings in Lua|puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
   - Credits                                |puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
@@ -126,8 +126,7 @@ conversions, the feature is opt-in only. This way, you can decide for yourself
 whether the occasional false positive is worth it for you or not.
 
 >lua
-    -- Enable auto-conversion of lua strings by removing lua from the disabled
-    -- filetypes (default: {"lua"}).
+    -- Enable auto-conversion of lua strings by removing lua from the disabled filetypes
     vim.g.puppeteer_disable_filetypes = {}
 <
 
@@ -137,21 +136,19 @@ whether the occasional false positive is worth it for you or not.
 
 CREDITS                                    *puppeteer-nvim-puppeteer--credits*
 
-**About Me** In my day job, I am a sociologist studying the social mechanisms
-underlying the digital economy. For my PhD project, I investigate the
-governance of the app economy and how software ecosystems manage the tension
-between innovation and compatibility. If you are interested in this subject,
-feel free to get in touch.
+In my day job, I am a sociologist studying the social mechanisms underlying the
+digital economy. For my PhD project, I investigate the governance of the app
+economy and how software ecosystems manage the tension between innovation and
+compatibility. If you are interested in this subject, feel free to get in
+touch.
 
-**Blog** I also occasionally blog about vim: Nano Tips for Vim
+I also occasionally blog about vim: Nano Tips for Vim
 <https://nanotipsforvim.prose.sh>
 
-**Profiles** - reddit <https://www.reddit.com/user/pseudometapseudo> - Discord
-<https://discordapp.com/users/462774483044794368/> - Academic Website
-<https://chris-grieser.de/> - Twitter <https://twitter.com/pseudo_meta> -
-Mastodon <https://pkm.social/@pseudometa> - ResearchGate
-<https://www.researchgate.net/profile/Christopher-Grieser> - LinkedIn
-<https://www.linkedin.com/in/christopher-grieser-ba693b17a/>
+- Academic Website <https://chris-grieser.de/>
+- Mastodon <https://pkm.social/@pseudometa>
+- ResearchGate <https://www.researchgate.net/profile/Christopher-Grieser>
+- LinkedIn <https://www.linkedin.com/in/christopher-grieser-ba693b17a/>
 
 
 
