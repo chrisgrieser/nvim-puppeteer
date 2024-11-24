@@ -16,9 +16,9 @@ for _, ft in pairs(vim.g.puppeteer_disabled_filetypes or {}) do
 end
 
 --------------------------------------------------------------------------------
-
+local activeFiletypes = vim.tbl_keys(supportedFiletypes)
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = vim.tbl_keys(supportedFiletypes),
+	pattern = activeFiletypes,
 	callback = function(ctx)
 		local ft = ctx.match
 		local stringTransformFunc = require("puppeteer")[supportedFiletypes[ft]]
@@ -27,6 +27,11 @@ vim.api.nvim_create_autocmd("FileType", {
 			buffer = 0,
 			callback = function(ctx2)
 				local bufnr = ctx2.buf
+
+				-- if buffer changed ft, disable this autocmd see #19
+				-- (returning `true` deletes an autocmd)
+				if vim.tbl_contains(activeFiletypes, vim.bo[bufnr].ft) then return true end
+
 				if
 					vim.b[bufnr].puppeteer_enabled == false
 					or vim.bo[bufnr].buftype ~= ""
