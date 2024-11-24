@@ -100,7 +100,6 @@ end
 
 --------------------------------------------------------------------------------
 
-local luaFormattingActive = false
 function M.luaFormatStr()
 	local node = getNodeAtCursor()
 	if not node then return end
@@ -137,20 +136,11 @@ function M.luaFormatStr()
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
 	if hasPlaceholder and not isFormatString then
-		-- HACK (1/2)
-		-- `luaFormattingActive` is used to prevent weird unexplainable duplicate
-		-- triggering. Not sure why it happens, the conditions should prevent it.
-		if luaFormattingActive then return end
-		luaFormattingActive = true
-
 		replaceNodeText(strNode, "(" .. text .. "):format()")
 		-- move cursor so user can insert there directly
 		local row, col = strNode:end_()
 		vim.api.nvim_win_set_cursor(0, { row + 1, col - 1 })
 		vim.cmd.startinsert()
-
-		-- HACK (2/2)
-		vim.defer_fn(function() luaFormattingActive = false end, 100)
 	elseif isFormatString and not hasPlaceholder then
 		local formatCall = strNode:parent():parent():parent()
 		if not formatCall then return end

@@ -18,13 +18,18 @@ end
 --------------------------------------------------------------------------------
 local activeFiletypes = vim.tbl_keys(supportedFiletypes)
 vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("nvim-puppeteer-autocmd-setup", { clear = true }),
+	desc = "nvim-puppeteer trigger to set up buffer-specific autocmds",
 	pattern = activeFiletypes,
 	callback = function(ctx)
 		local ft = ctx.match
 		local stringTransformFunc = require("puppeteer")[supportedFiletypes[ft]]
+		local groupForBuffer = ("nvim-puppeteer-trigger_%d"):format(ctx.buf)
 
 		vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 			buffer = 0,
+			group = vim.api.nvim_create_augroup(groupForBuffer, { clear = true }),
+			desc = "nvim-puppeteer trigger for supported filetypes",
 			callback = function(ctx2)
 				local bufnr = ctx2.buf
 
