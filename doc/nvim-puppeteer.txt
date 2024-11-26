@@ -1,6 +1,18 @@
 *nvim-puppeteer.txt*          For Neovim         Last change: 2024 November 26
 
 ==============================================================================
+Table of Contents                           *nvim-puppeteer-table-of-contents*
+
+1. nvim-puppeteer                             |nvim-puppeteer-nvim-puppeteer-|
+  - Features                         |nvim-puppeteer-nvim-puppeteer--features|
+  - Requirements                 |nvim-puppeteer-nvim-puppeteer--requirements|
+  - Installation                 |nvim-puppeteer-nvim-puppeteer--installation|
+  - Configuration               |nvim-puppeteer-nvim-puppeteer--configuration|
+  - User commands               |nvim-puppeteer-nvim-puppeteer--user-commands|
+  - Special case: formatted strings in Lua|nvim-puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
+  - Credits                           |nvim-puppeteer-nvim-puppeteer--credits|
+
+==============================================================================
 1. nvim-puppeteer                             *nvim-puppeteer-nvim-puppeteer-*
 
 
