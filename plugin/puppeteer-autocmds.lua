@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 				-- if buffer changed ft, disable this autocmd see #19
 				-- (returning `true` deletes an autocmd)
-				if vim.tbl_contains(activeFiletypes, vim.bo[bufnr].ft) then return true end
+				if not vim.tbl_contains(activeFiletypes, vim.bo[bufnr].ft) then return true end
 
 				if
 					vim.b[bufnr].puppeteer_enabled == false
