@@ -1,4 +1,4 @@
-*nvim-puppeteer.txt*          For Neovim         Last change: 2025 November 24
+*nvim-puppeteer.txt*          For Neovim         Last change: 2025 December 19
 
 ==============================================================================
 Table of Contents                           *nvim-puppeteer-table-of-contents*
@@ -9,7 +9,7 @@ Table of Contents                           *nvim-puppeteer-table-of-contents*
   - Installation                 |nvim-puppeteer-nvim-puppeteer--installation|
   - Configuration               |nvim-puppeteer-nvim-puppeteer--configuration|
   - User commands               |nvim-puppeteer-nvim-puppeteer--user-commands|
-  - Special case: formatted strings in Lua|nvim-puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
+  - Special case: formatted strings in lua|nvim-puppeteer-nvim-puppeteer--special-case:-formatted-strings-in-lua|
   - Credits                           |nvim-puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
@@ -17,7 +17,7 @@ Table of Contents                           *nvim-puppeteer-table-of-contents*
 
 
 
-Masterof strings. Automatically convert strings to f-strings or template
+Master of strings. Automatically convert strings to f-strings or template
 strings and back.
 
 - |nvim-puppeteer-features|
@@ -31,14 +31,15 @@ strings and back.
 
 FEATURES                             *nvim-puppeteer-nvim-puppeteer--features*
 
-- When typing `{}` in a **Python string** automatically converts it to an f-string.
+- When typing `{}` in a **Python string** automatically converts it to a
+    f-string.
 - Adding `${}` or a line break in a **JavaScript string** automatically converts
     it to a template string. (Also works in related languages like JS-React or
-    Typescript.)
+    TypeScript.)
 - Typing `%s` in a **non-pattern Lua string** automatically converts it to a
     formatted string. (Opt-in, as this has |nvim-puppeteer-some-caveats|.)
 - _Removing_ the `{}`, `${}`, or `%s` converts it back to a regular string.
-- Also works with multi-line strings and undos.
+- Also works with multiline strings and undos.
 - Zero configuration. Just install and you are ready to go.
 
 
@@ -87,8 +88,8 @@ Shown are the default values.
 
 USER COMMANDS                   *nvim-puppeteer-nvim-puppeteer--user-commands*
 
-The plugin is enabled by default and lazy-loaded upon opening a relevant file
-type. In case you wish to turn of puppeteer for the current buffer, the
+The plugin is enabled by default and lazy-loaded upon opening a relevant
+filetype. In case you wish to turn of puppeteer for the current buffer, the
 following user commands are provided:
 
 - `PuppeteerToggle`: Toggle puppeteer for the current buffer.
@@ -101,9 +102,9 @@ SPECIAL CASE: FORMATTED STRINGS IN LUA*nvim-puppeteer-nvim-puppeteer--special-ca
 Through string.format
 <https://www.lua.org/manual/5.4/manual.html#pdf-string.format>, there are also
 formatted strings in Lua. However, auto-conversions are far more difficult in
-lua `%s` is used as a placeholder for `string.format` and as class in lua
+Lua `%s` is used as a placeholder for `string.format` and as class in lua
 patterns <https://www.lua.org/manual/5.4/manual.html#6.4.1> at the same time.
-While it is possible to identify in some cases whether a lua string is used as
+While it is possible to identify in some cases whether a Lua string is used as
 pattern, there are certain cases where that is not possible:
 
 >lua
@@ -121,7 +122,7 @@ pattern, there are certain cases where that is not possible:
     str:find(pattern)
 <
 
-Since the auto-conversion of lua strings can result in undesired false
+Since the auto-conversion of Lua strings can result in undesired false
 conversions, the feature is opt-in only. This way, you can decide for yourself
 whether the occasional false positive is worth it for you or not.
 
@@ -132,7 +133,7 @@ whether the occasional false positive is worth it for you or not.
 
 
   [!TIP] You can also use `PuppeteerToggle` to temporarily disable the plugin for
-  the current buffer, if a specific lua string is giving you trouble.
+  the current buffer, if a specific Lua string is giving you trouble.
 
 CREDITS                               *nvim-puppeteer-nvim-puppeteer--credits*
 
