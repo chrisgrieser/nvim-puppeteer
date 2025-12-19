@@ -1,6 +1,4 @@
-<!-- LTeX: enabled=false -->
-# nvim-puppeteer 🎎
-<!-- LTeX: enabled=true -->
+# nvim-puppeteer 🎎 <!-- rumdl-disable-line MD063 `nvim` lowercased -->
 <a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer">
 <img alt="Shield" src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield"/></a>
 
@@ -20,15 +18,16 @@ strings and back.
 <!-- tocstop -->
 
 ## Features
-- When typing `{}` in a **Python string** automatically converts it to an f-string.
+- When typing `{}` in a **Python string** automatically converts it to a
+  f-string.
 - Adding `${}` or a line break in a **JavaScript string** automatically converts
   it to a template string. (Also works in related languages like JS-React or
-  Typescript.)
+  TypeScript.)
 - Typing `%s` in a **non-pattern Lua string** automatically converts it to a
   formatted string. (Opt-in, as this has [some
   caveats](#special-case-formatted-strings-in-lua).)
 - *Removing* the `{}`, `${}`, or `%s` converts it back to a regular string.
-- Also works with multi-line strings and undos.
+- Also works with multiline strings and undos.
 - Zero configuration. Just install and you are ready to go.
 
 ## Requirements
@@ -71,21 +70,21 @@ vim.g.puppeteer_js_quotation_mark = '"'
 > `config`.
 
 ## User commands
-The plugin is enabled by default and lazy-loaded upon opening a relevant file type.
-In case you wish to turn of puppeteer for the current buffer, the following user
-commands are provided:
+The plugin is enabled by default and lazy-loaded upon opening a relevant
+filetype. In case you wish to turn of puppeteer for the current buffer, the
+following user commands are provided:
 
 - `PuppeteerToggle`: Toggle puppeteer for the current buffer.
 - `PuppeteerDisable`: Disable puppeteer for the current buffer.
 - `PuppeteerEnable`: Enable puppeteer for the current buffer.
 
-## Special case: formatted strings in Lua
+## Special case: formatted strings in `lua`
 Through
 [string.format](https://www.lua.org/manual/5.4/manual.html#pdf-string.format),
 there are also formatted strings in Lua. However, auto-conversions are far more
-difficult in lua `%s` is used as a placeholder for `string.format` and [as class
+difficult in Lua `%s` is used as a placeholder for `string.format` and [as class
 in lua patterns](https://www.lua.org/manual/5.4/manual.html#6.4.1) at the same
-time. While it is possible to identify in some cases whether a lua string is
+time. While it is possible to identify in some cases whether a Lua string is
 used as pattern, there are certain cases where that is not possible:
 
 ```lua
@@ -103,7 +102,7 @@ local pattern = "foobar %s baz"
 str:find(pattern)
 ```
 
-Since the auto-conversion of lua strings can result in undesired false
+Since the auto-conversion of Lua strings can result in undesired false
 conversions, the feature is opt-in only. This way, you can decide for yourself
 whether the occasional false positive is worth it for you or not.
 
@@ -114,9 +113,8 @@ vim.g.puppeteer_disable_filetypes = {}
 
 > [!TIP]
 > You can also use `PuppeteerToggle` to temporarily disable the plugin for the
-> current buffer, if a specific lua string is giving you trouble.
+> current buffer, if a specific Lua string is giving you trouble.
 
-<!-- vale Google.FirstPerson = NO -->
 ## Credits
 In my day job, I am a sociologist studying the social mechanisms underlying the
 digital economy. For my PhD project, I investigate the governance of the app
