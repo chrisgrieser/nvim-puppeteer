@@ -1,4 +1,4 @@
-# nvim-puppeteer 🎎 <!-- rumdl-disable-line MD063 `nvim` lowercased -->
+# nvim-puppeteer 🎎 <!-- rumdl-disable-line MD063 -->
 <a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer">
 <img alt="Shield" src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield"/></a>
 
