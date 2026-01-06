@@ -55,7 +55,9 @@ vim.api.nvim_create_autocmd("FileType", {
 -- USER COMMANDS
 
 ---@param mode "Enabled"|"Disabled"
-local function notify(mode) vim.notify(mode .. " for current buffer.", nil, { title = "nvim-puppeteer" }) end
+local function notify(mode)
+	vim.notify(mode .. " for current buffer.", nil, { title = "nvim-puppeteer" })
+end
 
 vim.api.nvim_create_user_command("PuppeteerDisable", function()
 	vim.b.puppeteer_enabled = false

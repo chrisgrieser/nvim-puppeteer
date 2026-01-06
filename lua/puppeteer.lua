@@ -36,7 +36,9 @@ local maxCharacters = 200
 function M.templateStr()
 	local node = getNodeAtCursor()
 	if not node then return end
-	if node:type() == "string_fragment" or node:type() == "escape_sequence" then node = node:parent() end
+	if node:type() == "string_fragment" or node:type() == "escape_sequence" then
+		node = node:parent()
+	end
 	if not node then return end
 	local text = getNodeText(node)
 
@@ -132,7 +134,8 @@ function M.luaFormatStr()
 	-- REPLACE TEXT
 	-- string format: https://www.lua.org/manual/5.4/manual.html#pdf-string.format
 	-- patterns: https://www.lua.org/manual/5.4/manual.html#6.4.1
-	local hasPlaceholder = (text:find("%%[sq]") and not text:find("%%s[*+-]")) or text:find("%%06[Xx]")
+	local hasPlaceholder = (text:find("%%[sq]") and not text:find("%%s[*+-]"))
+		or text:find("%%06[Xx]")
 	local isFormatString = strNode:parent():type() == "parenthesized_expression"
 
 	if hasPlaceholder and not isFormatString then
