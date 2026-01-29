@@ -1,9 +1,9 @@
-*nvim-puppeteer.txt*          For Neovim         Last change: 2025 December 30
+*nvim-puppeteer.txt*          For Neovim          Last change: 2026 January 29
 
 ==============================================================================
 Table of Contents                           *nvim-puppeteer-table-of-contents*
 
-1. nvim-puppeteer                             |nvim-puppeteer-nvim-puppeteer-|
+1. Nvim-puppeteer                             |nvim-puppeteer-nvim-puppeteer-|
   - Features                         |nvim-puppeteer-nvim-puppeteer--features|
   - Requirements                 |nvim-puppeteer-nvim-puppeteer--requirements|
   - Installation                 |nvim-puppeteer-nvim-puppeteer--installation|
@@ -13,7 +13,7 @@ Table of Contents                           *nvim-puppeteer-table-of-contents*
   - Credits                           |nvim-puppeteer-nvim-puppeteer--credits|
 
 ==============================================================================
-1. nvim-puppeteer                             *nvim-puppeteer-nvim-puppeteer-*
+1. Nvim-puppeteer                             *nvim-puppeteer-nvim-puppeteer-*
 
 
 
