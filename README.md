@@ -1,4 +1,4 @@
-# nvim-puppeteer 🎎 <!-- rumdl-disable-line MD063 -->
+# Nvim-puppeteer 🎎 <!-- rumdl-disable-line MD063 -->
 <a href="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer">
 <img alt="Shield" src="https://dotfyle.com/plugins/chrisgrieser/nvim-puppeteer/shield"/></a>
 
@@ -6,15 +6,13 @@ Master of strings. Automatically convert strings to f-strings or template
 strings and back.
 
 <!-- toc -->
-
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [User commands](#user-commands)
-- [Special case: formatted strings in Lua](#special-case-formatted-strings-in-lua)
+- [Special case: formatted strings in lua](#special-case-formatted-strings-in-lua)
 - [Credits](#credits)
-
 <!-- tocstop -->
 
 ## Features
