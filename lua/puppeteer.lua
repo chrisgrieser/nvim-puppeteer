@@ -89,9 +89,10 @@ function M.pythonFStr()
 	if #text > maxCharacters then return end -- safeguard on converting invalid code
 
 	local isFString = text:find("^r?f") -- rf -> raw-formatted-string
+	local isTString = text:find("^r?t") -- rt -> raw-template-string
 	local hasBraces = text:find("{.-[^%d,%s].-}") -- nonRegex-braces, see #12 and #15
 
-	if not isFString and hasBraces then
+	if not isFString and hasBraces and not isTString then
 		text = "f" .. text
 		replaceNodeText(strNode, text)
 	elseif isFString and not hasBraces then
